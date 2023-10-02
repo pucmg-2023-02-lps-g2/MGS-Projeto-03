@@ -1,5 +1,5 @@
 # Descrição do sistema
-Deseja-se desenvolver um sistema de moeda estudantil no qual um professor pode distribuir moedas como forma de reconhecimento do esforço do aluno em sala de aula e um aluno pode trocar as moedas recebidas por alguma vantagem como desconto na mensalidada, compra de materiais específicos.
+Deseja-se desenvolver um sistema de moeda estudantil no qual um professor pode distribuir moedas como forma de reconhecimento do esforço do aluno em sala de aula e um aluno pode trocar as moedas recebidas por alguma vantagem como desconto na mensalidade, compra de materiais específicos, etc.
 
 - Os alunos que desejam ingressar no sistema de mérito devem realizar um cadastro, indicando nome, email, CPF, RG, Endereço, Instituição de Ensino e curso. As instituições participantes já estão pré-cadastradas no sistema, para que o aluno selecione.
 
@@ -29,9 +29,9 @@ Deseja-se desenvolver um sistema de moeda estudantil no qual um professor pode d
 - Eu, como **aluno**, desejo realizar o cadastro para participar do sistema de mérito.
 - Eu, como **aluno**, desejo escolher qual a instituição da qual faço parte para receber as moedas estudantis.
 - Eu, como **aluno**, desejo selecionar uma vantagem para poder trocar minhas moedas.
-- Eu, como **aluno**, desejo verificar o extraro da conta para saber quantas moedas foram recebidas e trocadas.
-- Eu, como **professor**, gostaria enviar moedas para um aluno para para reconhecer seu esforço.
+- Eu, como **aluno**, desejo verificar o extrato da conta para saber quantas moedas foram recebidas e trocadas.
+- Eu, como **professor**, gostaria de enviar moedas para um aluno para reconhecer seu esforço.
 - Eu, como **professor**, gostaria de visualizar meu extrato para saber quantas moedas foram enviadas.
 - Eu, como **membro externo interessado**, quero realizar o cadastro para fazer uma parceria com o sistema.
-- Eu, como **membro externo interessaso**, quero cadastrar uma vantagem no sistema.
+- Eu, como **membro externo interessado**, quero cadastrar uma vantagem no sistema.
 ---
