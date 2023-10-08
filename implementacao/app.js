@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
-app.use("", require("./routes/routes.js"))
+app.use("", require("./routes/routes.js"));
+app.use('/public/icons', express.static('./public/icons')); // Display de imagens só funciona com esse middleware
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`)

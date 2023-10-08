@@ -20,6 +20,10 @@ router.get("/register", (req, res) => {
     res.render('register.ejs')
 })
 
+router.get("/home", (req, res) => {
+    res.render('home.ejs')
+})
+
 router.get('/users', userController.listStudents,userController.listTeachers);
 
 router.get('/partners', partnerController.listPartners);
