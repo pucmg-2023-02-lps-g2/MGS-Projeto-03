@@ -1,5 +1,5 @@
 # MSG
-Sistema para estimular o reconhecimento do mérito estudantil através de uma moeda virtual. Essa moeda pode ser distribuída por professores aos seus alunos e trocada pelos alunos por produtos e descontos em empresas parceiras. 
+MGS — Moedas Gerenciadas por um Sistema — tem como objetivo estimular o reconhecimento do mérito estudantil através de moedas virtuais. As moedads são distribuídas por professores aos seus alunos e trocada pelos alunos por diversas vantagens em empresas parceiras. 
 
 ---
 # Integrantes
