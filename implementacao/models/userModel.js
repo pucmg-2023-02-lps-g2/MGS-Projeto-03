@@ -26,7 +26,6 @@ async function getAllStudents() {
   return data;
 }
 
-
 async function addStudent(cpf, name, address, course_id) {
   try {
     const data = [

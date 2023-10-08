@@ -1,5 +1,3 @@
-const supabase = require("../config/supabase");
-
 const userModel = require(".././models/userModel")
 
 async function listStudents(req, res) {

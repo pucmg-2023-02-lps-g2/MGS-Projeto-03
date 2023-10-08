@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+    <h1>Parceiros</h1>
+
+    <main class="container">
+        <div style="margin-bottom: 10%">
+            <h2>Empresas parceiras</h2>
+
+            <h4>Visualizar empresas</h4>
+            <table role="grid">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% partners.forEach(partner => { %>
+                        <tr>
+                            <td>
+                                <%= partner.id %>
+                            </td>
+                            <td>
+                                <%= partner.name %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+
+            <h4>Adicionar empresa</h4>
+        </div>
+
+    </main>
+
+    <%- include('partials/footer') %>
