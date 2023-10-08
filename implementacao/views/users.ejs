@@ -1,105 +1,111 @@
 <%- include('partials/header') %>
 <%- include('partials/nav') %>
 
-    <h1>Usuários</h1>
+<h1>Usuários</h1>
 
-    <main class="container">
-        <div style="margin-bottom: 10%">
-            <h2>Estudantes</h2>
+<main class="container">
+    <div style="margin-bottom: 10%">
+        <h2>Estudantes</h2>
 
-            <h4>Visualizar estudantes</h4>
-            <table role="grid">
-                <thead>
+        <h4>Visualizar estudantes</h4>
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Endereço</th>
+                    <th>course_id</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% students.forEach(student=> { %>
                     <tr>
-                        <th>CPF</th>
-                        <th>Nome</th>
-                        <th>Endereço</th>
-                        <th>course_id</th>
+                        <td>
+                            <%= student.cpf %>
+                        </td>
+                        <td>
+                            <%= student.name %>
+                        </td>
+                        <td>
+                            <%= student.address %>
+                        </td>
+                        <td>
+                            <%= student.course_id %>
+                        </td>
+                        <td>
+                            <form action="/users/delete/<%= student.cpf %>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="submit"><img src="../public/icons/bin.png" alt="Excluir"></button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <% students.forEach(student=> { %>
-                        <tr>
-                            <td>
-                                <%= student.cpf %>
-                            </td>
-                            <td>
-                                <%= student.name %>
-                            </td>
-                            <td>
-                                <%= student.address %>
-                            </td>
-                            <td>
-                                <%= student.course_id %>
-                            </td>
-                        </tr>
-                        <% }); %>
-                </tbody>
-            </table>
+                    <% }); %>
+            </tbody>
+        </table>
 
-            <h4>Adicionar estudante</h4>
-            <form action="/addStudent" method="POST">
-                <div class="grid">
-                    <label for="cpf">
-                        CPF
-                        <input type="text" name="cpf" placeholder="Ex: '23456789012'" required>
-                    </label>
-
-                    <label for="name">
-                        Nome
-                        <input type="text" name="name" placeholder="Ex: 'Cirilo Rivera'" required>
-                    </label>
-                </div>
-
-                <label for="address">
-                    Endereço
-                    <input type="text" name="address" placeholder="Ex: 'Avenida Central, 384'" required>
+        <h4>Adicionar estudante</h4>
+        <form action="/addStudent" method="POST">
+            <div class="grid">
+                <label for="cpf">
+                    CPF
+                    <input type="text" name="cpf" placeholder="Ex: '23456789012'" required>
                 </label>
 
-                <!-- TODO Iterar sobre todos os cursos para popular o select. -->
-                <label for="course_id">
-                    course_id
-                    <input type="int" name="course_id" required>
+                <label for="name">
+                    Nome
+                    <input type="text" name="name" placeholder="Ex: 'Cirilo Rivera'" required>
                 </label>
+            </div>
 
-                <button type="submit">Novo estudante</button>
-            </form>
-        </div>
+            <label for="address">
+                Endereço
+                <input type="text" name="address" placeholder="Ex: 'Avenida Central, 384'" required>
+            </label>
 
-        <div>
-            <h2>Professores</h2>
+            <!-- TODO Iterar sobre todos os cursos para popular o select. -->
+            <label for="course_id">
+                course_id
+                <input type="int" name="course_id" required>
+            </label>
 
-            <h4>Visualizar professores</h4>
-            <table role="grid">
-                <thead>
+            <button type="submit">Novo estudante</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Professores</h2>
+
+        <h4>Visualizar professores</h4>
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>institution_id</th>
+                    <th>department_id</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% students.forEach(student=> { %>
                     <tr>
-                        <th>CPF</th>
-                        <th>Nome</th>
-                        <th>institution_id</th>
-                        <th>department_id</th>
+                        <td>
+                            <%= student.cpf %>
+                        </td>
+                        <td>
+                            <%= student.name %>
+                        </td>
+                        <td>
+                            <%= student.institution_id %>
+                        </td>
+                        <td>
+                            <%= student.department_id %>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <% students.forEach(student=> { %>
-                        <tr>
-                            <td>
-                                <%= student.cpf %>
-                            </td>
-                            <td>
-                                <%= student.name %>
-                            </td>
-                            <td>
-                                <%= student.institution_id %>
-                            </td>
-                            <td>
-                                <%= student.department_id %>
-                            </td>
-                        </tr>
-                        <% }); %>
-                </tbody>
-            </table>
-        </div>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+</main>
 
-    </main>
-
-    <%- include('partials/footer') %>
+<%- include('partials/footer') %>

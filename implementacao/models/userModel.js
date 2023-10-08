@@ -54,6 +54,17 @@ async function addStudent(cpf, name, address, course_id) {
   }
 }
 
+async function deleteStudent(studentCPF) {
+  const { error } = await supabase
+    .from("students")
+    .delete()
+    .eq("cpf", studentCPF);
+
+  if (error) {
+    throw error;
+  }
+}
+
 async function getAllTeachers() {
   const { data, error } = await supabase.from('teachers').select('*');
   if (error) {
@@ -66,5 +77,6 @@ module.exports = {
   getUserInfo,
   getAllStudents,
   addStudent,
+  deleteStudent,
   getAllTeachers,
 };

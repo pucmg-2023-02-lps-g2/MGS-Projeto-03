@@ -1,13 +1,19 @@
-const router = require('express').Router();   
+const router = require('express').Router();
 
 const authController = require('../controllers/authController.js')
 const userController = require('../controllers/userController.js')
 const partnerController = require('../controllers/partnerController.js')
 
+// General
 router.get("/", (req, res) => {
     res.render('index.ejs')
 })
 
+router.get("/home", (req, res) => {
+    res.render('home.ejs')
+})
+
+// Login and register
 router.get("/login", (req, res) => {
     res.render('login.ejs')
 })
@@ -20,14 +26,16 @@ router.get("/register", (req, res) => {
     res.render('register.ejs')
 })
 
-router.get("/home", (req, res) => {
-    res.render('home.ejs')
-})
+// Users
+router.get('/users', userController.listStudents, userController.listTeachers);
 
-router.get('/users', userController.listStudents,userController.listTeachers);
+router.post("/users/delete/:cpf", (req, res) => {
+    userController.deleteStudent(req, res);
+});
 
+// Partners
 router.get('/partners', partnerController.listPartners);
 
-// TODO Adicionar rota /addStudent
+
 
 module.exports = router
