@@ -19,7 +19,7 @@ router.get("/register", (req, res) => {
     res.render('register.ejs')
 })
 
-router.get('/users', userController.listStudents);
+router.get('/users', userController.listStudents,userController.listTeachers);
 
 // TODO Adicionar rota /addStudent
 

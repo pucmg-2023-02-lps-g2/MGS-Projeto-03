@@ -11,8 +11,20 @@ async function listStudents(req, res) {
       console.error(error);
       res.status(500).send('Internal Server Error');
     }
-  }
+}
+
+async function listTeachers(req, res) {
+    try {
+      const students = await userModel.getAllTeachers();
+      
+      res.render('users.ejs', { teachers });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+}
 
 module.exports = {
     listStudents,
+    listTeachers,
 };

@@ -67,6 +67,36 @@
 
         <div>
             <h2>Professores</h2>
+
+            <h4>Visualizar professores</h4>
+            <table role="gridd">
+                <thead>
+                    <tr>
+                        <th>CPF</th>
+                        <th>Nome</th>
+                        <th>institution_id</th>
+                        <th>department_id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% students.forEach(student=> { %>
+                        <tr>
+                            <td>
+                                <%= student.cpf %>
+                            </td>
+                            <td>
+                                <%= student.name %>
+                            </td>
+                            <td>
+                                <%= student.institution_id %>
+                            </td>
+                            <td>
+                                <%= student.department_id %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
         </div>
 
     </main>
