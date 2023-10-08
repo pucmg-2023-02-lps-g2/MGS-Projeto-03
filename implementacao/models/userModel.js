@@ -1,10 +1,12 @@
+const supabase = require("../config/supabase");
+
 async function getUserInfo(cpf) {
   try {
     const { data, error } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', cpf)
-    .single();
+      .from('users')
+      .select('*')
+      .eq('id', cpf)
+      .single();
 
     if (error) {
       throw error;
@@ -12,6 +14,39 @@ async function getUserInfo(cpf) {
 
     return data;
   } catch (error) {
-      throw error;
+    throw error;
   }
 }
+
+async function addStudent(cpf, name, address, course_id) {
+  try {
+    const data = [
+      {
+        cpf,
+        name,
+        address,
+        course_id,
+      },
+    ];
+
+    // Se já houver estudante com o mesmo CPF, indicará conflito
+    const { data: students, error } = await supabase.from("students").upsert(data, { onConflict: ["cpf"] });
+
+    if (error) {
+      throw error;
+    }
+
+    if (students.length === 1) {
+      return students[0];
+    } else {
+      throw new Error("Error: Failed to add the student");
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  getUserInfo,
+  addStudent,
+};

@@ -8,4 +8,6 @@ router.get("/users", (req, res) => {
     res.send("Usuários")
 });
 
+// TODO Adicionar rota /addStudent
+
 module.exports = router

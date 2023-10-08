@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+
+    <h1>Usuários</h1>
+
+    <main class="container">
+        <div style="margin-bottom: 10%">
+            <h2>Estudantes</h2>
+
+            <h4>Visualizar estudantes</h4>
+            <table row="grid">
+                <thead>
+                    <tr>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Curso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Cancelado</th>
+                        <td>Maria Joaquina</td>
+                        <td>Rua 1</td>
+                        <td>Engenharia Aeroespacial</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Adicionar estudante</h4>
+            <form action="/addStudent" method="POST">
+                <div class="grid">
+                    <label for="cpf">
+                        CPF
+                        <input type="text" name="cpf" placeholder="Ex: '23456789012'" required>
+                    </label>
+
+                    <label for="name">
+                        Nome
+                        <input type="text" name="name" placeholder="Ex: 'Cirilo Rivera'" required>
+                    </label>
+                </div>
+
+                <label for="address">
+                    Endereço
+                    <input type="text" name="address" placeholder="Ex: 'Avenida Central, 384'" required>
+                </label>
+
+                <!-- TODO Iterar sobre todos os cursos para popular o select. -->
+                <label for="course_id">
+                    course_id
+                    <input type="int" name="course_id" required>
+                </label>
+
+                <button type="submit">Novo estudante</button>
+            </form>
+        </div>
+
+        <div>
+            <h2>Professores</h2>
+        </div>
+
+    </main>
+
+    <%- include('partials/footer') %>
