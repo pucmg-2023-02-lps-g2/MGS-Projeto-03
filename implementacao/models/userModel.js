@@ -1,24 +1,17 @@
-async function createSchema() {
+async function getUserInfo(cpf) {
+  try {
     const { data, error } = await supabase
-      .from('public') // 'public' is the schema name, change it if needed
-      .schema()
-      .upsert([
-        {
-          name: 'users', // Name of your user table
-          columns: [
-            { name: 'id', type: 'uuid', primary: true },
-            { name: 'email', type: 'text', unique: true },
-            { name: 'password', type: 'text' },
-            // Add more columns as needed for your user data
-          ],
-        },
-      ]);
-  
+    .from('users')
+    .select('*')
+    .eq('id', cpf)
+    .single();
+
     if (error) {
-      console.error('Error creating user schema:', error);
-    } else {
-      console.log('User schema created successfully');
+      throw error;
     }
+
+    return data;
+  } catch (error) {
+      throw error;
   }
-  
-  createSchema();
+}
