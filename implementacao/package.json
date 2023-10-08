@@ -2,5 +2,22 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.38.0",
     "dotenv": "^16.3.1"
-  }
+  },
+  "name": "implementacao",
+  "version": "1.0.0",
+  "description": "MGS - Moedas Gerenciadas Por um Sistema",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "MGS-Projeto-03"
+  },
+  "keywords": [
+    "MGS"
+  ],
+  "author": "Grupo 02",
+  "license": "ISC"
 }
