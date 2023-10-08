@@ -18,6 +18,15 @@ async function getUserInfo(cpf) {
   }
 }
 
+async function getAllStudents() {
+  const { data, error } = await supabase.from('students').select('*');
+  if (error) {
+    throw error;
+  }
+  return data;
+}
+
+
 async function addStudent(cpf, name, address, course_id) {
   try {
     const data = [
@@ -48,5 +57,6 @@ async function addStudent(cpf, name, address, course_id) {
 
 module.exports = {
   getUserInfo,
+  getAllStudents,
   addStudent,
 };

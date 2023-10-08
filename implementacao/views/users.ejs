@@ -7,22 +7,32 @@
             <h2>Estudantes</h2>
 
             <h4>Visualizar estudantes</h4>
-            <table row="grid">
+            <table role="gridd">
                 <thead>
                     <tr>
-                        <th scope="col">CPF</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Endereço</th>
-                        <th scope="col">Curso</th>
+                        <th>CPF</th>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                        <th>course_id</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">Cancelado</th>
-                        <td>Maria Joaquina</td>
-                        <td>Rua 1</td>
-                        <td>Engenharia Aeroespacial</td>
-                    </tr>
+                    <% students.forEach(student=> { %>
+                        <tr>
+                            <td>
+                                <%= student.cpf %>
+                            </td>
+                            <td>
+                                <%= student.name %>
+                            </td>
+                            <td>
+                                <%= student.address %>
+                            </td>
+                            <td>
+                                <%= student.course_id %>
+                            </td>
+                        </tr>
+                        <% }); %>
                 </tbody>
             </table>
 

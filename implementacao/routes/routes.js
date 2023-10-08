@@ -1,6 +1,7 @@
 const router = require('express').Router();   
 
 const authController = require('../controllers/authController.js')
+const userController = require('../controllers/userController.js')
 
 router.get("/", (req, res) => {
     res.render('index.ejs')
@@ -18,9 +19,7 @@ router.get("/register", (req, res) => {
     res.render('register.ejs')
 })
 
-router.get("/users", (req, res) => {
-    res.send("users.ejs")
-});
+router.get('/users', userController.listStudents);
 
 // TODO Adicionar rota /addStudent
 
