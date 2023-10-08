@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+
+    <h1>Cadastrar</h1>
+
+    <form action="/register" method="post">
+
+        <h2>Credenciais</h2>
+
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email">
+
+        <label for="senha">Senha</label>
+        <input type="senha" name="senha" id="senha">
+
+        <hr>
+
+        <h2>Dados Pessoais</h2>
+
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome">
+
+        <label for="cpf">CPF</label>
+        <input type="text" name="cpf" id="cpf">
+
+        <label for="rg">RG</label>
+        <input type="text" name="rg" id="rg">
+
+        <label for="endereco">Endereço</label>
+        <input type="text" name="endereco" id="endereco">
+
+        <hr>
+
+        <h2>Dados Academicos</h2>
+
+        <label for="instituicao">Instituição</label>
+        <input type="text" name="instituicao" id="instituicao">
+
+        <label for="curso">Curso</label>
+        <input type="text" name="curso" id="curso">
+
+        <button type="submit">Cadastrar</button>
+
+    </form>
+
+<%- include('partials/footer') %>
