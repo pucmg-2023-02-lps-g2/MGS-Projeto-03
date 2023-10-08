@@ -36,6 +36,9 @@ router.post("/users/delete/:cpf", (req, res) => {
 // Partners
 router.get('/partners', partnerController.listPartners);
 
+router.post("/partners/delete/:id", (req, res) => {
+    partnerController.deletePartner(req, res);
+});
 
 
 module.exports = router

@@ -8,6 +8,18 @@ async function getAllPartners() {
     return data;
 }
 
+async function deletePartner(partnerId) {
+    const { error } = await supabase
+      .from("partners")
+      .delete()
+      .eq("id", partnerId);
+  
+    if (error) {
+      throw error;
+    }
+  }
+
 module.exports = {
     getAllPartners,
+    deletePartner,
 }

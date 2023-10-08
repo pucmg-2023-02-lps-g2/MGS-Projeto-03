@@ -1,7 +1,9 @@
 <%- include('partials/header') %>
 <%- include('partials/nav') %>
 
-<h1>Usuários</h1>
+<header style="padding: 1rem;">
+    <h1>Usuários</h1>
+</header>
 
 <main class="container">
     <div style="margin-bottom: 10%">
@@ -15,7 +17,7 @@
                     <th>Nome</th>
                     <th>Endereço</th>
                     <th>course_id</th>
-                    <th>Actions</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,25 +86,11 @@
                     <th>Nome</th>
                     <th>institution_id</th>
                     <th>department_id</th>
+                    <!-- <th>Ações</th> -->
                 </tr>
             </thead>
             <tbody>
-                <% students.forEach(student=> { %>
-                    <tr>
-                        <td>
-                            <%= student.cpf %>
-                        </td>
-                        <td>
-                            <%= student.name %>
-                        </td>
-                        <td>
-                            <%= student.institution_id %>
-                        </td>
-                        <td>
-                            <%= student.department_id %>
-                        </td>
-                    </tr>
-                    <% }); %>
+                
             </tbody>
         </table>
     </div>

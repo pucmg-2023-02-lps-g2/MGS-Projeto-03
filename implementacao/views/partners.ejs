@@ -1,7 +1,9 @@
 <%- include('partials/header') %>
 <%- include('partials/nav') %>
 
+<header style="padding: 1rem;">
     <h1>Parceiros</h1>
+</header>
 
     <main class="container">
         <div style="margin-bottom: 10%">
@@ -13,6 +15,7 @@
                     <tr>
                         <th>id</th>
                         <th>Nome</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +26,12 @@
                             </td>
                             <td>
                                 <%= partner.name %>
+                            </td>
+                            <td>
+                                <form action="/partners/delete/<%= partner.id %>" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <button type="submit"><img src="../public/icons/bin.png" alt="Excluir"></button>
+                                </form>
                             </td>
                         </tr>
                         <% }); %>
