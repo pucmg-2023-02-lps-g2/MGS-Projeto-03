@@ -8,6 +8,21 @@ async function getAllPartners() {
     return data;
 }
 
+async function addPartner({ id, name }) {
+  const { data, error } = await supabase.from('partners').insert([
+      {
+          id,
+          name,
+      },
+  ]);
+
+  if (error) {
+      throw error;
+  }
+
+  return data;
+}
+
 async function deletePartner(partnerId) {
     const { error } = await supabase
       .from("partners")
@@ -21,5 +36,6 @@ async function deletePartner(partnerId) {
 
 module.exports = {
     getAllPartners,
+    addPartner,
     deletePartner,
 }

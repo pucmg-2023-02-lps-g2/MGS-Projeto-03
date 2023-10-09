@@ -29,6 +29,8 @@ router.get("/register", (req, res) => {
 // Users
 router.get('/users', userController.listStudents, userController.listTeachers);
 
+router.post('/addStudent', userController.addStudent);
+
 router.post("/users/delete/:cpf", (req, res) => {
     userController.deleteStudent(req, res);
 });
@@ -36,9 +38,10 @@ router.post("/users/delete/:cpf", (req, res) => {
 // Partners
 router.get('/partners', partnerController.listPartners);
 
+router.post('/partners/add', partnerController.addPartner);
+
 router.post("/partners/delete/:id", (req, res) => {
     partnerController.deletePartner(req, res);
 });
-
 
 module.exports = router

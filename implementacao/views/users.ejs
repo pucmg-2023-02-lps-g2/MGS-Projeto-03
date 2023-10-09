@@ -18,6 +18,7 @@
                     <th>Endereço</th>
                     <th>course_id</th>
                     <th>Ações</th>
+                    <th> </th>
                 </tr>
             </thead>
             <tbody>
@@ -39,6 +40,12 @@
                             <form action="/users/delete/<%= student.cpf %>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE" />
                                 <button type="submit"><img src="../public/icons/bin.png" alt="Excluir"></button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/users/edit/<%= student.cpf %>" method="POST">
+                                <input type="hidden" name="_method" value="UPDATE" />
+                                <button type="submit"><img src="../public/icons/edit.png" alt="Excluir"></button>
                             </form>
                         </td>
                     </tr>
@@ -90,7 +97,7 @@
                 </tr>
             </thead>
             <tbody>
-                
+                <!-- Adicionar mesma lógica da tabela "students" acima -->
             </tbody>
         </table>
     </div>

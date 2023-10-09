@@ -11,6 +11,18 @@ async function listStudents(req, res) {
   }
 }
 
+async function addStudent(req, res) {
+  try {
+    const { cpf, name, address, course_id } = req.body;
+    const data = await userModel.addStudent({ cpf, name, address, course_id });
+
+    res.redirect('/users');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao adicionar estudante.');
+  }
+};
+
 async function deleteStudent(req, res) {
   const studentCPF = req.params.cpf;
 
@@ -18,7 +30,7 @@ async function deleteStudent(req, res) {
     await userModel.deleteStudent(studentCPF);
     res.redirect("/users");
   } catch (error) {
-    console.error("Error deleting student:", error);
+    console.error("Erro ao deletar estudante:", error);
     res.status(500).send("Internal Server Error");
   }
 }
@@ -36,6 +48,7 @@ async function listTeachers(req, res) {
 
 module.exports = {
   listStudents,
-  listTeachers,
+  addStudent,  
   deleteStudent,
+  listTeachers,
 };

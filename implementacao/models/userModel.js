@@ -26,32 +26,21 @@ async function getAllStudents() {
   return data;
 }
 
-async function addStudent(cpf, name, address, course_id) {
-  try {
-    const data = [
+async function addStudent({ cpf, name, address, course_id }) {
+  const { data, error } = await supabase.from('students').insert([
       {
-        cpf,
-        name,
-        address,
-        course_id,
+          cpf,
+          name,
+          address,
+          course_id,
       },
-    ];
+  ]);
 
-    // Se já houver estudante com o mesmo CPF, indicará conflito
-    const { data: students, error } = await supabase.from("students").upsert(data, { onConflict: ["cpf"] });
-
-    if (error) {
+  if (error) {
       throw error;
-    }
-
-    if (students.length === 1) {
-      return students[0];
-    } else {
-      throw new Error("Error: Failed to add the student");
-    }
-  } catch (error) {
-    throw error;
   }
+
+  return data;
 }
 
 async function deleteStudent(studentCPF) {
