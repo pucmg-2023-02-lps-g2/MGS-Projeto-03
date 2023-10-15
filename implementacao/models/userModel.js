@@ -18,12 +18,100 @@ async function getUserInfo(cpf) {
   }
 }
 
+async function getStudentDataById(id) {
+  try {
+    const { data, error } = await supabase
+      .from('students')
+      .select('*')
+      .eq('uuid', id)
+      .single();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getTeacherDataById(id) {
+  try {
+    const { data, error } = await supabase
+      .from('teachers')
+      .select('*')
+      .eq('uuid', id)
+      .single();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getAllStudents() {
   const { data, error } = await supabase.from('students').select('*');
   if (error) {
     throw error;
   }
   return data;
+}
+
+async function loginStudent({ email, password}) {
+
+  let { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  })
+
+  if (error) {}
+
+  const userData = await getStudentDataById(data.user.id)
+
+  const cookieData = { ...userData, email: data.user.email }
+
+  return cookieData
+}
+
+async function loginTeacher({ email, password}) {
+
+  let { data, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  })
+
+  if (error) { }
+
+  const userData = await getTeacherDataById(data.user.id)
+
+  const cookieData = { ...userData, email: data.user.email }
+
+  return cookieData
+}
+ 
+async function registerUser({ cpf, nome, rg, endereco, curso, instituicao, uuid }) {
+  const { data, error } = await supabase.from('students').insert([
+    {
+      cpf,
+      name: nome,
+      address: endereco,
+      rg,
+      course_id: curso,
+      institution_id: instituicao,
+      uuid
+    }
+  ])
+
+  if (error) {
+    console.log(error);
+  }
+
+  return data
 }
 
 async function addStudent({ cpf, name, address, course_id }) {
@@ -68,4 +156,7 @@ module.exports = {
   addStudent,
   deleteStudent,
   getAllTeachers,
+  registerUser,
+  loginStudent,
+  loginTeacher,
 };

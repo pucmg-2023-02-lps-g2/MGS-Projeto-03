@@ -4,27 +4,35 @@ const authController = require('../controllers/authController.js')
 const userController = require('../controllers/userController.js')
 const partnerController = require('../controllers/partnerController.js')
 
-// General
+// Index
+
 router.get("/", (req, res) => {
     res.render('index.ejs')
 })
+
+// Home
 
 router.get("/home", (req, res) => {
     res.render('home.ejs')
 })
 
-// Login and register
+// Login
+
 router.get("/login", (req, res) => {
     res.render('login.ejs')
 })
 
+// Logout
+
+router.post('/logout', authController.logout)
+
 router.post("/login", authController.login)
 
-router.post("/register", authController.register)
+// Register
 
-router.get("/register", (req, res) => {
-    res.render('register.ejs')
-})
+router.get("/register", authController.renderRegister)
+
+router.post("/register", authController.register)
 
 // Users
 router.get('/users', userController.listStudents, userController.listTeachers);

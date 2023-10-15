@@ -13,7 +13,9 @@ async function listStudents(req, res) {
 
 async function addStudent(req, res) {
   try {
+
     const { cpf, name, address, course_id } = req.body;
+
     const data = await userModel.addStudent({ cpf, name, address, course_id });
 
     res.redirect('/users');

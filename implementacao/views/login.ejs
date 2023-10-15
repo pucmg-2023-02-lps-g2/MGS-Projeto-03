@@ -4,11 +4,22 @@
 
     <form action="/login" method="post">
 
+        <label for="usuario">Usuário</label>
+        <select id="usuario" name="usuario" required>
+
+            <option value="" disabled selected>Selecione</option>
+
+                <option value="1">Aluno</option>
+
+                <option value="2">Professor</option>
+
+        </select>
+
         <label for="email">E-mail</label>
         <input type="email" name="email" id="email">
 
-        <label for="password">Senha</label>
-        <input type="password" name="password" id="password">
+        <label for="senha">Senha</label>
+        <input type="password" name="senha" id="senha">
 
         <button type="submit">Logar</button>
 
