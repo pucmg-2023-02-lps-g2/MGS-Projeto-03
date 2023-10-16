@@ -1,7 +1,25 @@
 <%- include('partials/header') %>
 
-<h1>Você é aluno</h1>
+<h4>Área do aluno</h4>
 
-<%- include('partials/mgs') %>
+<h2>Benefícios disponíveis</h2>
+<table role="grid">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Empresa parceira</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% benefits.forEach(benefit => { %>
+            <tr>
+                <td><%= benefit.name %></td>
+                <td><%= benefit.partner_id %></td>
+                <td><%= benefit.price %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
 
 <%- include('partials/footer') %>

@@ -14,10 +14,12 @@ module.exports = {
 
             res.cookie('rg', userData.rg)
             res.cookie('course_id', userData.course_id)
+            res.cookie('user_role', 'student')
         } else {
             userData = await loginTeacher({ email, password: senha })
 
             res.cookie('department_id', userData.department_id)
+            res.cookie('user_role', 'teacher')            
         }
 
         res.cookie('token', userData.uuid)
@@ -61,6 +63,7 @@ module.exports = {
         res.cookie('course_id', null, { expires: new Date(0) })
         res.cookie('institution_id', null, { expires: new Date(0) })
         res.cookie('department_id', null, { expires: new Date(0) })
+        res.cookie('user_role', null, { expires: new Date(0) })
 
         res.render('login')
     }
