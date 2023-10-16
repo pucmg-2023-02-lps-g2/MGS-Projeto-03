@@ -28,7 +28,8 @@ module.exports = {
         res.cookie('cpf', userData.cpf)
         res.cookie('institution_id', userData.institution_id)
 
-        res.render(usuario == '1' ? 'home_student' : 'home_teacher')
+        // res.render(usuario == '1' ? 'home_student' : 'home_teacher')
+        res.redirect("/home")
     },
 
     async renderRegister(req, res) {

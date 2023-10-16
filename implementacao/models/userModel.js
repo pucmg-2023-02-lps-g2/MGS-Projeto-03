@@ -145,25 +145,6 @@ async function getTeacherDataById(id) {
   }
 }
 
-async function getTeacherBalance(cpf) {
-  try {
-    const { data, error } = await supabase
-      .from('teachers')
-      .select('balance')
-      .eq('cpf', cpf)
-      .single();
-
-    if (error) {
-      throw error;
-    }
-
-    const balance = data.balance;
-    return balance;
-  } catch (error) {
-    throw error;
-  }
-}
-
 async function loginTeacher({ email, password }) {
 
   let { data, error } = await supabase.auth.signInWithPassword({
@@ -199,6 +180,25 @@ async function getAllTeachers() {
   return data;
 }
 
+async function getTeacherBalance(cpf) {
+  try {
+    const { data, error } = await supabase
+      .from('teachers')
+      .select('balance')
+      .eq('cpf', cpf)
+      .single();
+
+    if (error) {
+      throw error;
+    }
+
+    const balance = data.balance;
+    return balance;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   registerUser,
   getUserInfo,
@@ -208,7 +208,7 @@ module.exports = {
   addStudent,
   deleteStudent,
   loginStudent,
+  loginTeacher,
   getAllTeachers,
   getTeacherBalance,
-  loginTeacher,
 };

@@ -49,7 +49,7 @@ async function deleteStudent(req, res) {
 
 async function listTeachers(req, res) {
   try {
-    const students = await userModel.getAllTeachers();
+    const teachers = await userModel.getAllTeachers();
 
     res.render('users.ejs', { teachers });
   } catch (error) {
