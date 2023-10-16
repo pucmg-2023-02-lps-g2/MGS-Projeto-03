@@ -1,68 +1,68 @@
 <%- include('partials/header') %>
 
 <div class="grid">
-    <div style="padding: 1rem;"> 
-        <a href="/home" role="button"><img src="../../public/icons/home.png" style="max-height: 25px;"></a>
-    </div>
-    <div>
-        <con style="padding: 1rem;">
-            <h1>Parceiros</h1>
-        </header>
-    </div>
+<div style="padding: 1rem;"> 
+    <a href="/home" role="button"><img src="../../public/icons/home.png" style="max-height: 25px;"></a>
+</div>
+<div>
+    <con style="padding: 1rem;">
+        <h1>Parceiros</h1>
+    </header>
+</div>
 </div>
 
 
-    <main class="container">
-        <div style="margin-bottom: 10%">
-            <h2>Empresas parceiras</h2>
+<main class="container">
+    <div style="margin-bottom: 10%">
+        <h2>Empresas parceiras</h2>
 
-            <h4>Visualizar empresas</h4>
-            <table role="grid">
-                <thead>
+        <h4>Visualizar empresas</h4>
+        <table role="grid">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% partners.forEach(partner => { %>
                     <tr>
-                        <th>id</th>
-                        <th>Nome</th>
-                        <th>Ações</th>
+                        <td>
+                            <%= partner.id %>
+                        </td>
+                        <td>
+                            <%= partner.name %>
+                        </td>
+                        <td>
+                            <form action="/partners/delete/<%= partner.id %>" method="POST" style="margin-bottom: 0">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button  type="submit" style="margin-bottom: 0; width: 100px;"><img src="../public/icons/bin.png" alt="Excluir"></button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <% partners.forEach(partner => { %>
-                        <tr>
-                            <td>
-                                <%= partner.id %>
-                            </td>
-                            <td>
-                                <%= partner.name %>
-                            </td>
-                            <td>
-                                <form action="/partners/delete/<%= partner.id %>" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE" />
-                                    <button type="submit"><img src="../public/icons/bin.png" alt="Excluir"></button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }); %>
-                </tbody>
-            </table>
+                    <% }); %>
+            </tbody>
+        </table>
 
-            <h4>Adicionar empresa</h4>
-            <form action="/partners/add" method="POST">
-                <div class="grid">
-                    <label for="id">
-                        ID
-                        <input type="text" name="id" placeholder="Ex: '1'" required>
-                    </label>
-    
-                    <label for="name">
-                        Nome
-                        <input type="text" name="name" placeholder="Ex: 'Empresa Brasileira de Pesquisa Agropecuária'" required>
-                    </label>
-                </div>
-    
-                <button type="submit">Nova empresa</button>
-            </form>
-        </div>
+        <h4>Adicionar empresa</h4>
+        <form action="/partners/add" method="POST">
+            <div class="grid">
+                <label for="id">
+                    ID
+                    <input type="text" name="id" placeholder="Ex: '1'" required>
+                </label>
 
-    </main>
+                <label for="name">
+                    Nome
+                    <input type="text" name="name" placeholder="Ex: 'Empresa Brasileira de Pesquisa Agropecuária'" required>
+                </label>
+            </div>
 
-    <%- include('partials/footer') %>
+            <button type="submit">Nova empresa</button>
+        </form>
+    </div>
+
+</main>
+
+<%- include('partials/footer') %>

@@ -22,10 +22,11 @@
                 <th>Nome</th>
                 <th>institution_id</th>
                 <th>course_id</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            <% students.forEach(student => { %>
+            <% students.forEach(student=> { %>
                 <tr>
                     <td>
                         <%= student.cpf %>
@@ -40,9 +41,9 @@
                         <%= student.course_id %>
                     </td>
                     <td>
-                        <form action="/users/delete/<%= student.cpf %>" method="POST">
+                        <form action="/users/delete/<%= student.cpf %>" method="POST" style="margin: 0">
                             <input type="hidden" name="_method" value="DELETE" />
-                            <button type="submit"><img src="../public/icons/bin.png" alt="Excluir"></button>
+                            <button style="margin-bottom: 0;" type="submit"><img src="../public/icons/bin.png" alt="Excluir"></button>
                         </form>
                     </td>
                 </tr>
@@ -57,13 +58,13 @@
                 CPF
                 <input type="text" name="cpf" placeholder="Ex: '23456789012'" required>
             </label>
-    
+
             <label for="name">
                 Nome
                 <input type="text" name="name" placeholder="Ex: 'Cirilo Rivera'" required>
             </label>
         </div>
-    
+
         <label for="address">
             Endereço
             <input type="text" name="address" placeholder="Ex: 'Avenida Central, 384'" required>
@@ -73,13 +74,13 @@
             institution_id
             <input type="int" name="institution_id" required>
         </label>
-    
+
         <!-- TODO Iterar sobre todos os cursos para popular o select. -->
         <label for="course_id">
             course_id
             <input type="int" name="course_id" required>
         </label>
-    
+
         <button type="submit">Novo estudante</button>
     </form>
 </div>
@@ -98,7 +99,7 @@
             </tr>
         </thead>
         <tbody>
-            <% teachers.forEach(teacher => { %>
+            <% teachers.forEach(teacher=> { %>
                 <tr>
                     <td>
                         <%= teacher.cpf %>
