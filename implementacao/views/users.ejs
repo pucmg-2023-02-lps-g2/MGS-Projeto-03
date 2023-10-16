@@ -39,6 +39,12 @@
                     <td>
                         <%= student.course_id %>
                     </td>
+                    <td>
+                        <form action="/users/delete/<%= student.cpf %>" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit"><img src="../public/icons/bin.png" alt="Excluir"></button>
+                        </form>
+                    </td>
                 </tr>
                 <% }); %>
         </tbody>
@@ -61,6 +67,11 @@
         <label for="address">
             Endereço
             <input type="text" name="address" placeholder="Ex: 'Avenida Central, 384'" required>
+        </label>
+
+        <label for="institution_id">
+            institution_id
+            <input type="int" name="institution_id" required>
         </label>
     
         <!-- TODO Iterar sobre todos os cursos para popular o select. -->

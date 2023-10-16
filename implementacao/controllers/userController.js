@@ -36,9 +36,9 @@ async function addBalance(req, res) {
 async function addStudent(req, res) {
   try {
 
-    const { cpf, name, address, course_id } = req.body;
+    const { cpf, name, address, institution_id, course_id } = req.body;
 
-    const data = await userModel.addStudent({ cpf, name, address, course_id });
+    const data = await userModel.addStudent({ cpf, name, address, institution_id, course_id });
 
     res.redirect('/users');
   } catch (error) {

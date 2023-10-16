@@ -169,12 +169,13 @@ async function getAllStudents() {
   return data;
 }
 
-async function addStudent({ cpf, name, address, course_id }) {
+async function addStudent({ cpf, name, address, institution_id, course_id }) {
   const { data, error } = await supabase.from('students').insert([
     {
       cpf,
       name,
       address,
+      institution_id,
       course_id,
     },
   ]);
