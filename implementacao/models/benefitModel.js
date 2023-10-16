@@ -26,7 +26,6 @@ async function getBenefitById(id) {
     }
 }
 
-
 module.exports = {
     getAllBenefits,
     getBenefitById

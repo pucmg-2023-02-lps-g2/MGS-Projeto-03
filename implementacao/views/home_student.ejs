@@ -20,6 +20,7 @@
                 <th>Nome</th>
                 <th>Empresa parceira</th>
                 <th>Preço</th>
+                <th>Descrição</th>
                 <th>Resgatar</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
                 <tr>
                     <td><%= benefit.name %></td>
                     <td><%= benefit.partner_id %></td>
+                    <td><%= benefit.description %></td>
                     <td><%= benefit.price %></td>
                     <td>
                         <form action="/benefits/update/<%= benefit.id %>" method="POST">
