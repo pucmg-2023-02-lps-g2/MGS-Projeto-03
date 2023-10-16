@@ -10,17 +10,3 @@
 
 <body>
 
-<nav style="padding: 0 0 1rem 0;">
-    <% if (role === 'teacher') { %>
-        <%- include('nav_teacher') %>
-    <% } %>
-    <ul>
-        <li>
-            <form method="post" action="/logout" style="margin: 0;">
-                <button type="submit" style="border: none; background-color: white;">
-                    <a id="logoutIcon" style="cursor: pointer;"><img src="../public/icons/exit.png" alt="Sair"></a>
-                </button>
-            </form>
-        </li>
-    </ul>        
-</nav>

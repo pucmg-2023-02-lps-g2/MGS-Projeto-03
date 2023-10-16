@@ -1,73 +1,111 @@
 <%- include('partials/header') %>
-    <%- include('partials/nav') %>
 
-        <header style="padding: 1rem;">
-            <h3>Usuários</h3>
-        </header>
+<div class="grid">
+    <div style="padding: 1rem;">
+        <a href="/home" role="button"><img src="../../public/icons/home.png" style="max-height: 25px;"></a>
+    </div>
+    <div>
+        <con style="padding: 1rem;">
+            <h1>Usuários</h1>
+            </header>
+    </div>
+</div>
 
-                <h4>Adicionar estudante</h4>
-                <form action="/addStudent" method="POST">
-                    <div class="grid">
-                        <label for="cpf">
-                            CPF
-                            <input type="text" name="cpf" placeholder="Ex: '23456789012'" required>
-                        </label>
+<div>
+    <h2>Estudantes</h2>
 
-                        <label for="name">
-                            Nome
-                            <input type="text" name="name" placeholder="Ex: 'Cirilo Rivera'" required>
-                        </label>
-                    </div>
+    <h4>Visualizar todos estudantes</h4>
+    <table role="grid">
+        <thead>
+            <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>institution_id</th>
+                <th>course_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% students.forEach(student => { %>
+                <tr>
+                    <td>
+                        <%= student.cpf %>
+                    </td>
+                    <td>
+                        <%= student.name %>
+                    </td>
+                    <td>
+                        <%= student.institution_id %>
+                    </td>
+                    <td>
+                        <%= student.course_id %>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
 
-                    <label for="address">
-                        Endereço
-                        <input type="text" name="address" placeholder="Ex: 'Avenida Central, 384'" required>
-                    </label>
+    <h4>Adicionar estudante</h4>
+    <form action="/addStudent" method="POST">
+        <div class="grid">
+            <label for="cpf">
+                CPF
+                <input type="text" name="cpf" placeholder="Ex: '23456789012'" required>
+            </label>
+    
+            <label for="name">
+                Nome
+                <input type="text" name="name" placeholder="Ex: 'Cirilo Rivera'" required>
+            </label>
+        </div>
+    
+        <label for="address">
+            Endereço
+            <input type="text" name="address" placeholder="Ex: 'Avenida Central, 384'" required>
+        </label>
+    
+        <!-- TODO Iterar sobre todos os cursos para popular o select. -->
+        <label for="course_id">
+            course_id
+            <input type="int" name="course_id" required>
+        </label>
+    
+        <button type="submit">Novo estudante</button>
+    </form>
+</div>
 
-                    <!-- TODO Iterar sobre todos os cursos para popular o select. -->
-                    <label for="course_id">
-                        course_id
-                        <input type="int" name="course_id" required>
-                    </label>
+<div>
+    <h2>Professores</h2>
 
-                    <button type="submit">Novo estudante</button>
-                </form>
-            </div>
+    <h4>Visualizar todos professores</h4>
+    <table role="grid">
+        <thead>
+            <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>institution_id</th>
+                <th>department_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% teachers.forEach(teacher => { %>
+                <tr>
+                    <td>
+                        <%= teacher.cpf %>
+                    </td>
+                    <td>
+                        <%= teacher.name %>
+                    </td>
+                    <td>
+                        <%= teacher.institution_id %>
+                    </td>
+                    <td>
+                        <%= teacher.department_id %>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</div>
+</main>
 
-            <div>
-                <h2>Professores</h2>
-
-                <h4>Visualizar professores</h4>
-                <table role="grid">
-                    <thead>
-                        <tr>
-                            <th>CPF</th>
-                            <th>Nome</th>
-                            <th>institution_id</th>
-                            <th>department_id</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% teachers.forEach(teacher=> { %>
-                            <tr>
-                                <td>
-                                    <%= teacher.cpf %>
-                                </td>
-                                <td>
-                                    <%= teacher.name %>
-                                </td>
-                                <td>
-                                    <%= teacher.institution_id %>
-                                </td>
-                                <td>
-                                    <%= teacher.department_id %>
-                                </td>
-                            </tr>
-                            <% }); %>
-                    </tbody>
-                </table>
-
-            </div>
-        </main>
-
-        <%- include('partials/footer') %>
+<%- include('partials/footer') %>
