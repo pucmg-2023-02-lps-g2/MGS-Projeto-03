@@ -1,10 +1,11 @@
 const userModel = require(".././models/userModel")
 
-async function listStudents(req, res) {
+async function listUsers(req, res) {
   try {
     const students = await userModel.getAllStudents();
+    const teachers = await userModel.getAllTeachers()
 
-    res.render('users.ejs', { students });
+    res.render('users.ejs', { students, teachers });
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
@@ -68,17 +69,6 @@ async function deleteStudent(req, res) {
   }
 }
 
-async function listTeachers(req, res) {
-  try {
-    const students = await userModel.getAllTeachers();
-
-    res.render('users.ejs', { teachers });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
-  }
-}
-
 async function getTeacherBalance(req, res, cpf) {
   try {
     const balance = await userModel.getTeacherBalance(cpf);
@@ -90,12 +80,12 @@ async function getTeacherBalance(req, res, cpf) {
 }
 
 module.exports = {
-  listStudents,
+  listUsers,
   addStudent,
   getStudentBalance,
   deleteStudent,
-  listTeachers,
   getTeacherBalance,  
   getTeacherStudents,
-  addBalance
+  addBalance,
+  getTeacherBalance,
 };
