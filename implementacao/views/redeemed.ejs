@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<header class="containter-fluid">
+    <h1>Você resgatou: <%= benefit.name %></h1>
+
+
+</header>
+
+<main class="container-fluid">
+    <div class="grid">
+
+        <h3>Preço: <%= benefit.price %></h3>
+
+        <hr>
+
+        <h3>Saldo Anterior: <%= (Number(benefit.price) + balance) %></h3>
+
+        <h1>Saldo Atual: <%= balance %></h1>
+
+        <form action="/home" method="get">
+            <button type="submit">Voltar</button>
+        </form>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

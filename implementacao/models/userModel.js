@@ -20,6 +20,92 @@ async function registerUser({ cpf, nome, rg, endereco, curso, instituicao, uuid 
   return data
 }
 
+async function getBalance(cpf) {
+  
+    const { data, error } = await supabase
+      .from('students')
+      .select('balance')
+      .eq('cpf', cpf)
+  
+    return data
+}
+
+async function getTeacherBalance(cpf) {
+  
+  const { data, error } = await supabase
+    .from('teachers')
+    .select('balance')
+    .eq('cpf', cpf)
+
+  return data
+}
+
+async function removeFromTeacherBalance(cpf, coins) {
+  
+    var currentBalance = await getTeacherBalance(cpf)
+  
+    var updatedBalance = currentBalance - coins
+  
+    const { data, error } = await supabase
+      .from('teachers')
+      .update({ balance: updatedBalance })
+      .eq('cpf', cpf)
+  
+    return data
+}
+
+async function removeFromStudentBalance(cpf, coins) {
+    
+    var currentBalance = await getBalance(cpf)
+
+    var updatedBalance = Number(currentBalance[0].balance) - Number(coins)
+  
+    const { data, error } = await supabase
+      .from('students')
+      .update({ balance: updatedBalance })
+      .eq('cpf', cpf)
+  
+    return data
+}
+
+async function addBalance(cpf, teacherCpf, coins) {
+
+  var currentBalance = await getBalance(cpf)
+
+  var updatedBalance = Number(currentBalance[0].balance) + Number(coins)
+
+  const { data, error } = await supabase
+    .from('students')
+    .update({ balance: updatedBalance })
+    .eq('cpf', cpf)
+
+  removeFromTeacherBalance(teacherCpf, coins)
+
+  return data
+}
+
+async function getCoursesByDepartment(department_id) {
+
+  const { data, error } = await supabase
+    .from('courses')
+    .select('*')
+    .eq('department_id', department_id)
+
+  return data
+}
+
+async function getTeacherStudents(department_id) {
+
+  const courses = await getCoursesByDepartment(department_id)
+
+  const { data, error } = await supabase
+    .from('students')
+    .select('*')
+    .in('course_id', courses.map(course => course.id))
+
+  return data
+}
+
 async function getUserInfo(cpf) {
   try {
     const { data, error } = await supabase
@@ -211,4 +297,7 @@ module.exports = {
   getAllTeachers,
   getTeacherBalance,
   loginTeacher,
+  getTeacherStudents,
+  addBalance,
+  removeFromStudentBalance
 };

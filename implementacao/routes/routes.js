@@ -13,16 +13,26 @@ router.get("/", (req, res) => {
 
 router.get("/home", async (req, res, next) => {
     const role = req.cookies.user_role
+    
     cpf = req.cookies.cpf
 
     if (role === 'teacher') {
+
         const teacherBalance = await userController.getTeacherBalance(req, res, cpf);
-        res.render("home_teacher", { teacherBalance });
+
+        const students = await userController.getTeacherStudents(req.cookies.department_id);
+
+        res.render("home_teacher", { teacherBalance, students });
+
     } else {
+
         try {
+
             const studentBalance = await userController.getStudentBalance(req, res, cpf);
             const benefits = await benefitController.listBenefits();
+
             res.render("home_student", { benefits, studentBalance });
+
         } catch (error) {
             console.error(error);
             res.status(500).send('Internal Server Error');
@@ -57,6 +67,8 @@ router.post("/users/delete/:cpf", (req, res) => {
     userController.deleteStudent(req, res);
 });
 
+router.post('/users/update/:cpf', userController.addBalance)
+
 // Partners
 router.get('/partners', partnerController.listPartners);
 
@@ -65,6 +77,8 @@ router.post('/partners/add', partnerController.addPartner);
 router.post("/partners/delete/:id", (req, res) => {
     partnerController.deletePartner(req, res);
 });
+
+router.post('/benefits/update/:id', benefitController.redeemBenefit)
 
 
 module.exports = router

@@ -1,8 +1,6 @@
 <%- include('partials/header') %>
 
-<h4>Área do aluno</h4>
-
-<p>Seu saldo é: <%= studentBalance %></p>
+<p>Saldo: <strong><%= studentBalance %> Moedas</strong></p>
 
 <h2>Benefícios disponíveis</h2>
 <table role="grid">
@@ -11,6 +9,7 @@
             <th>Nome</th>
             <th>Empresa parceira</th>
             <th>Preço</th>
+            <th>Resgatar</th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +18,14 @@
                 <td><%= benefit.name %></td>
                 <td><%= benefit.partner_id %></td>
                 <td><%= benefit.price %></td>
+                <td>
+                    <form action="/benefits/update/<%= benefit.id %>" method="POST">
+                        
+                        <input type="hidden" name="benefitPrice" value="<%= benefit.price %>">
+                        
+                        <button type="submit"><img src="../public/icons/send.png" alt="Enviar"></button>
+                    </form>
+                </td>
             </tr>
         <% }); %>
     </tbody>

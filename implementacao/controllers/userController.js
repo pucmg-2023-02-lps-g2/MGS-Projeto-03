@@ -11,6 +11,27 @@ async function listStudents(req, res) {
   }
 }
 
+async function getTeacherStudents(department_id) {
+
+    const students = await userModel.getTeacherStudents(department_id);
+
+    return students;
+
+}
+
+async function addBalance(req, res) {
+
+  const cpf = req.params.cpf
+
+  const teacherCpf = req.cookies.cpf
+
+  const { coins } = req.body
+
+  await userModel.addBalance(cpf, teacherCpf, coins)
+
+  res.redirect('/home')
+}
+
 async function addStudent(req, res) {
   try {
 
@@ -75,4 +96,6 @@ module.exports = {
   deleteStudent,
   listTeachers,
   getTeacherBalance,  
+  getTeacherStudents,
+  addBalance
 };
