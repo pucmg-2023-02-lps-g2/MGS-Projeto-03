@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 
 router.get("/home", async (req, res, next) => {
     const role = req.cookies.user_role
-    
+
     cpf = req.cookies.cpf
 
     if (role === 'teacher') {
@@ -22,16 +22,14 @@ router.get("/home", async (req, res, next) => {
 
         const students = await userController.getTeacherStudents(req.cookies.department_id);
 
-        res.render("home_teacher", { teacherBalance, students });
+        res.render("home_teacher", { teacherBalance, students, role });
 
     } else {
-
         try {
-
             const studentBalance = await userController.getStudentBalance(req, res, cpf);
             const benefits = await benefitController.listBenefits();
 
-            res.render("home_student", { benefits, studentBalance });
+            res.render("home_student", { benefits, studentBalance, role });
 
         } catch (error) {
             console.error(error);

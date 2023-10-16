@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <title>MGS | Moedas Gerenciadas por um Sistema</title>
 </head>
+
 <body>
 
-    <nav>
-
-        <h1>Seja bem-vindo(a) ao MGS</h1>
-
-        <ul>
-            <li>
-                <form method="post" action="/logout">
-                    <button type="submit">Sair</button>
-                </form>
-            </li>
-        </ul>
-    </nav>
+<nav style="padding: 0 0 1rem 0;">
+    <% if (role === 'teacher') { %>
+        <%- include('nav_teacher') %>
+    <% } %>
+    <ul>
+        <li>
+            <form method="post" action="/logout" style="margin: 0;">
+                <button type="submit" style="border: none; background-color: white;">
+                    <a id="logoutIcon" style="cursor: pointer;"><img src="../public/icons/exit.png" alt="Sair"></a>
+                </button>
+            </form>
+        </li>
+    </ul>        
+</nav>
