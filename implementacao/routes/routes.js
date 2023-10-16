@@ -16,8 +16,8 @@ router.get("/home", async (req, res, next) => {
     cpf = req.cookies.cpf
 
     if (role === 'teacher') {
-        const teacherBalace = await userController.getTeacherBalance(req, res, cpf);
-        res.render("home_teacher", { balance: balance });
+        const teacherBalance = await userController.getTeacherBalance(req, res, cpf);
+        res.render("home_teacher", { teacherBalance });
     } else {
         try {
             const studentBalance = await userController.getStudentBalance(req, res, cpf);

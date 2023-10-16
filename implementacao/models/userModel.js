@@ -148,7 +148,7 @@ async function getTeacherDataById(id) {
 async function getTeacherBalance(cpf) {
   try {
     const { data, error } = await supabase
-      .from('students')
+      .from('teachers')
       .select('balance')
       .eq('cpf', cpf)
       .single();

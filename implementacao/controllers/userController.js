@@ -26,7 +26,6 @@ async function addStudent(req, res) {
 }
 
 async function getStudentBalance(req, res, cpf) {
-
   try {
     const balance = await userModel.getStudentBalance(cpf);
     return balance;
@@ -61,8 +60,8 @@ async function listTeachers(req, res) {
 
 async function getTeacherBalance(req, res, cpf) {
   try {
-    const balance = await userModel.getStudentBalance(cpf);
-    res.render('home_student', { balance: balance });
+    const balance = await userModel.getTeacherBalance(cpf);
+    return balance;
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
