@@ -49,7 +49,7 @@ router.get("/register", authController.renderRegister)
 router.post("/register", authController.register)
 
 // Users
-router.get('/users', userController.listStudents, userController.listTeachers, benefitController.listBenefits);
+router.get('/users', userController.listUsers, benefitController.listBenefits);
 
 router.post('/addStudent', userController.addStudent);
 
