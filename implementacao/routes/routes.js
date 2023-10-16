@@ -11,18 +11,24 @@ router.get("/", (req, res) => {
     res.render('index.ejs')
 })
 
-// Home
-router.get("/home", async (req, res) => { 
-
-    role = req.cookies.user_role
+router.get("/home", async (req, res, next) => {
+    const role = req.cookies.user_role
+    cpf = req.cookies.cpf
 
     if (role === 'teacher') {
-        res.render("home_teacher")
-    } else if (role === 'student') {
-        const benefits = await benefitController.listBenefits(); 
-        res.render("home_student", {benefits: benefits})
+        const teacherBalace = await userController.getTeacherBalance(req, res, cpf);
+        res.render("home_teacher", { balance: balance });
+    } else {
+        try {
+            const studentBalance = await userController.getStudentBalance(req, res, cpf);
+            const benefits = await benefitController.listBenefits();
+            res.render("home_student", { benefits, studentBalance });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
     }
-});
+})
 
 // Login
 

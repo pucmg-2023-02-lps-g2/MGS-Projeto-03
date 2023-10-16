@@ -23,7 +23,18 @@ async function addStudent(req, res) {
     console.error(error);
     res.status(500).send('Erro ao adicionar estudante.');
   }
-};
+}
+
+async function getStudentBalance(req, res, cpf) {
+
+  try {
+    const balance = await userModel.getStudentBalance(cpf);
+    return balance;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+}
 
 async function deleteStudent(req, res) {
   const studentCPF = req.params.cpf;
@@ -48,9 +59,21 @@ async function listTeachers(req, res) {
   }
 }
 
+async function getTeacherBalance(req, res, cpf) {
+  try {
+    const balance = await userModel.getStudentBalance(cpf);
+    res.render('home_student', { balance: balance });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+
 module.exports = {
   listStudents,
-  addStudent,  
+  addStudent,
+  getStudentBalance,
   deleteStudent,
   listTeachers,
+  getTeacherBalance,  
 };

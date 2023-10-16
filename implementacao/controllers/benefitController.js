@@ -11,7 +11,6 @@ async function listBenefits(req, res) {
     }
 }
 
-
 module.exports = {
     listBenefits,
 };
