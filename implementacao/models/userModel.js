@@ -79,7 +79,7 @@ async function addBalance(cpf, teacherCpf, coins) {
     .update({ balance: updatedBalance })
     .eq('cpf', cpf)
 
-  removeFromTeacherBalance(teacherCpf, coins)
+  await removeFromTeacherBalance(teacherCpf, coins)
 
   return data
 }
