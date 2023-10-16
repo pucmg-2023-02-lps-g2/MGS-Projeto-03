@@ -1,28 +1,41 @@
-<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    <h1>Login</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <title>MGS | Login</title>
+</head>
 
-    <form action="/login" method="post">
+<h1>Login</h1>
 
-        <label for="usuario">Usuário</label>
-        <select id="usuario" name="usuario" required>
 
-            <option value="" disabled selected>Selecione</option>
+<div class="grid">
+    <div>
+        <form action="/login" method="post">
 
+            <label for="usuario">Usuário</label>
+            <select id="usuario" name="usuario" required>
+                <option value="" disabled selected>Selecione seu tipo de usuário</option>
                 <option value="aluno">Aluno</option>
-
                 <option value="professor">Professor</option>
+            </select>
 
-        </select>
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email">
 
-        <label for="email">E-mail</label>
-        <input type="email" name="email" id="email">
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha">
 
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha">
+            <button type="submit">Logar</button>
 
-        <button type="submit">Logar</button>
+        </form>
+    </div>
+    <div>
+        <!-- Div vazia para configurar o grid do Pico.css -->
+    </div>
+</div>
 
-    </form>
 
 <%- include('partials/footer') %>
