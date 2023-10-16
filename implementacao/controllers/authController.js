@@ -1,5 +1,5 @@
 const { supabase } = require('../app');
-const { getAllCourses } = require('../models/coursesModel');
+const { getAllCourses } = require('../models/courseModel');
 const { getAllInstitutions } = require('../models/institutionModel');
 const { registerUser, loginStudent, loginTeacher } = require('../models/userModel');
 
