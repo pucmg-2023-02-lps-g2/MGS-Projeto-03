@@ -59,11 +59,16 @@ async function renderRegisterPage(req, res) {
 
 async function renderBenefitsPage(req, res) {
     return new Promise(async (resolve, reject) => {
+
+        const { token } = req.cookies
+
         try {
+
+            const { balance } = await getPersonById(token)
 
             const benefits = await listBenefits()
 
-            res.render('benefits', { benefits })
+            res.render('benefits', { benefits, balance })
 
             resolve({ status: 200 })
 
@@ -90,13 +95,15 @@ async function getAllCourses() {
 async function renderStudentsPage(req, res) {
     return new Promise(async (resolve, reject) => {
 
-        const { cpf } = req.cookies
+        const { cpf, token } = req.cookies
 
         try {
 
+            const { balance } = await getPersonById(token)
+
             const students = await getStudentFromTeacherCpf(cpf);
         
-            res.render('students', { students })
+            res.render('students', { students, balance })
 
             resolve({ status: 200 })
 
@@ -133,9 +140,7 @@ async function renderHomePage(req, res) {
 
         try {
 
-            const { balance } = await getPersonById(token)
-
-            res.render("home", { balance, user_role });
+            res.render("home", { user_role });
 
             resolve({ status: 200 })
 

@@ -26,6 +26,12 @@ async function removeCoins(req, res) {
 
             const studentBalance = await getBalanceByCpf(cpf)
 
+            if (Number(studentBalance[0].balance) - Number(price) < 0) {
+                res.render('error', { message: 'Você não tem moedas suficientes para resgatar esse beneficio' })
+
+                return
+            }
+
             await supabase.from('person').update({ balance: (Number(studentBalance[0].balance) - Number(price)) }).eq('cpf', cpf)
 
             const message = `- ${Number(price)} Moedas - Resgatou ${benefit[0].name}`
@@ -58,6 +64,12 @@ async function giveCoins(req, res) {
             const studentBalance = await getBalanceByCpf(studentCpf)
 
             const teacherBalance = await getBalanceByCpf(cpf)
+
+            if (Number(teacherBalance[0].balance) - Number(coins) < 0) {
+                res.render('error', { message: 'Você não tem moedas suficientes para enviar' })
+
+                return
+            }
 
             await supabase.from('person').update({ balance: (Number(studentBalance[0].balance) + Number(coins)) }).eq('cpf', studentCpf)
 
