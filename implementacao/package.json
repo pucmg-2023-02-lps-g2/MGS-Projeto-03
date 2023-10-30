@@ -1,30 +1,19 @@
 {
+  "name": "mgs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@supabase/supabase-js": "^2.38.0",
+    "@supabase/supabase-js": "^2.38.4",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "express-session": "^1.17.3",
-    "multer": "^1.4.5-lts.1",
-    "nodemon": "^3.0.1"
-  },
-  "name": "implementacao",
-  "version": "1.0.0",
-  "description": "MGS - Moedas Gerenciadas Por um Sistema",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "MGS-Projeto-03"
-  },
-  "keywords": [
-    "MGS"
-  ],
-  "author": "Grupo 02",
-  "license": "ISC"
+    "express": "^4.18.2"
+  }
 }

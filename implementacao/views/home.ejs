@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+<%- include('partials/nav') %>
+
+<div class="grid">
+    <div class="centered-div">
+        <p class="centered-text"> 
+            <img src="../public/icons/coin.png" style="height: 30px;">
+            <strong>Saldo: </strong> <%= balance %> moedas
+        </p>
+    </div>
+</div>
+
+<style>
+    .centered-div {
+        background-color: #b7dfec;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        width: 240px;
+        border-radius: 8px;
+    }
+
+    .centered-text {
+        text-align: center;
+        margin: 0;
+        color: black;
+    }
+</style>
+
+<%- include('partials/footer') %>

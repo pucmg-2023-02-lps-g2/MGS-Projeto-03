@@ -34,7 +34,7 @@
                             <%= partner.name %>
                         </td>
                         <td>
-                            <form action="/partners/delete/<%= partner.id %>" method="POST" style="margin-bottom: 0">
+                            <form action="/partner/delete/<%= partner.id %>" method="POST" style="margin-bottom: 0">
                                 <input type="hidden" name="_method" value="DELETE" />
                                 <button  type="submit" style="margin-bottom: 0; width: 100px;"><img src="../public/icons/bin.png" alt="Excluir"></button>
                             </form>
@@ -45,7 +45,7 @@
         </table>
 
         <h4>Adicionar empresa</h4>
-        <form action="/partners/add" method="POST">
+        <form action="/partner/add" method="POST">
             <div class="grid">
                 <label for="id">
                     ID

@@ -1,305 +1,259 @@
-const supabase = require("../config/supabase");
+const { supabase } = require("../app");
+const { getAllPartners } = require("./partnerModel");
 
-async function registerUser({ cpf, nome, rg, endereco, curso, instituicao, uuid }) {
-  const { data, error } = await supabase.from('students').insert([
-    {
-      cpf,
-      name: nome,
-      address: endereco,
-      rg,
-      course_id: curso,
-      institution_id: instituicao,
-      uuid
-    }
-  ])
+async function renderRegisterPage(req, res) {
+    return new Promise(async (resolve, reject) => {
+        try {
 
-  if (error) {
-    console.log(error);
-  }
+            const institutions = await getAllInstitutions()
 
-  return data
+            const courses = await getAllCourses()
+
+            res.render('register', { institutions, courses })
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+
+        }
+    })
 }
 
-async function getBalance(cpf) {
-  
-    const { data, error } = await supabase
-      .from('students')
-      .select('balance')
-      .eq('cpf', cpf)
-  
+async function renderBenefitsPage(req, res) {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            const benefits = await listBenefits()
+
+            res.render('benefits', { benefits })
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+
+        }
+    })
+}
+
+async function getAllInstitutions() {
+    const { data } = await supabase.from('institutions').select('*')
+
     return data
 }
 
-async function getTeacherBalance(cpf) {
-  
-  const { data, error } = await supabase
-    .from('teachers')
-    .select('balance')
-    .eq('cpf', cpf)
+async function getAllCourses() {
+    const { data } = await supabase.from('courses').select('*')
 
-  return data
-}
-
-async function removeFromTeacherBalance(cpf, coins) {
-  
-    var currentBalance = await getTeacherBalance(cpf)
-  
-    var updatedBalance = currentBalance - coins
-  
-    const { data, error } = await supabase
-      .from('teachers')
-      .update({ balance: updatedBalance })
-      .eq('cpf', cpf)
-  
     return data
 }
 
-async function removeFromStudentBalance(cpf, coins) {
-    
-    var currentBalance = await getBalance(cpf)
+async function renderStudentsPage(req, res) {
+    return new Promise(async (resolve, reject) => {
 
-    var updatedBalance = Number(currentBalance[0].balance) - Number(coins)
-  
-    const { data, error } = await supabase
-      .from('students')
-      .update({ balance: updatedBalance })
-      .eq('cpf', cpf)
-  
+        const { cpf } = req.cookies
+
+        try {
+
+            const students = await getStudentFromTeacherCpf(cpf);
+        
+            res.render('students', { students })
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+
+        }
+    })
+}
+
+async function renderPartnersPage(req, res) {
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            // Fazer isso aqui é errado, deveria ser chamado uma http request para partnerController
+            const response = await getAllPartners();
+
+            console.log(response);
+
+            res.render('partners', { partners: response.partners })
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+
+        }
+    })
+}
+
+async function renderHomePage(req, res) {
+    return new Promise(async (resolve, reject) => {
+        const { user_role, token } = req.cookies
+
+        try {
+
+            const { balance } = await getPersonById(token)
+
+            res.render("home", { balance, user_role });
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+            reject({ status: 500 })
+        }
+    })
+}
+
+async function listBenefits() {
+    const { data } = await supabase.from('benefits').select('*')
+
     return data
 }
 
-async function addBalance(cpf, teacherCpf, coins) {
 
-  var currentBalance = await getBalance(cpf)
+async function getStudentFromTeacherCpf(teacherCpf) {
+    const { data, error } = await supabase.from('teachers').select(`
+        cpf,
+        department_id,
+        departments ( department_id, courses ( department_id, course_id, students ( course_id, cpf, person ( cpf, name, address, balance ))))
+    `)
+    .eq('cpf', teacherCpf).single()
 
-  var updatedBalance = Number(currentBalance[0].balance) + Number(coins)
+    var students = []
 
-  const { data, error } = await supabase
-    .from('students')
-    .update({ balance: updatedBalance })
-    .eq('cpf', cpf)
+    data.departments.courses.forEach(course => { console.log(course.students.forEach(student => { students.push(student.person) }))})
 
-  await removeFromTeacherBalance(teacherCpf, coins)
-
-  return data
+    return students
 }
 
-async function getCoursesByDepartment(department_id) {
+async function getPersonById(id) {
+    const { data } = await supabase.from('person').select('*').eq('uuid', id).single()
 
-  const { data, error } = await supabase
-    .from('courses')
-    .select('*')
-    .eq('department_id', department_id)
-
-  return data
+    return data
 }
 
-async function getTeacherStudents(department_id) {
+async function isTeacher(cpf) {
+    const { data, error } = await supabase.from('teachers').select('*').eq('cpf', cpf).single()
 
-  const courses = await getCoursesByDepartment(department_id)
-
-  const { data, error } = await supabase
-    .from('students')
-    .select('*')
-    .in('course_id', courses.map(course => course.id))
-
-  return data
+    return (data !== null ? true : false)
 }
 
-async function getUserInfo(cpf) {
-  try {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('id', cpf)
-      .single();
+async function logout(req, res) {
+    return new Promise(async (resolve, reject) => {
+        
+        res.cookie('token', null, { expires: new Date(0) })
+        res.cookie('name', null, { expires: new Date(0) })
+        res.cookie('email', null, { expires: new Date(0) })
+        res.cookie('address', null, { expires: new Date(0) })
+        res.cookie('balance', null, { expires: new Date(0) })
+        res.cookie('cpf', null, { expires: new Date(0) })
+        res.cookie('rg', null, { expires: new Date(0) })
+        res.cookie('institution_id', null, { expires: new Date(0) })
+        res.cookie('user_role', null, { expires: new Date(0) })
 
-    if (error) {
-      throw error;
-    }
+        res.redirect('/')
 
-    return data;
-  } catch (error) {
-    throw error;
-  }
+        resolve({ status: 200 })
+    })
 }
 
-async function getStudentBalance(cpf) {
-  try {
-    const { data, error } = await supabase
-      .from('students')
-      .select('balance')
-      .eq('cpf', cpf)
-      .single();
+async function login(req, res) {
+    return new Promise(async (resolve, reject) => {
+        const { email, senha } = req.body
 
-    if (error) {
-      throw error;
-    }
+        try {
 
-    const balance = data.balance;
-    return balance;
-  } catch (error) {
-    throw error;
-  }
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: senha,
+            })
+
+            const userInfo = await getPersonById(data.user.id)
+
+            res.cookie('token', data.user.id)
+            res.cookie('name', userInfo.name)
+            res.cookie('cpf', userInfo.cpf)
+            res.cookie('rg', userInfo.rg)
+            res.cookie('address', userInfo.address)
+            res.cookie('balance', userInfo.balance)
+            res.cookie('institution_id', userInfo.institution_id)
+
+            res.cookie('email', data.user.email)
+
+            if (await isTeacher(userInfo.cpf)) {
+                
+                res.cookie('user_role', 'teacher')
+
+            } else {
+
+                res.cookie('user_role', 'student')
+
+            }
+
+            res.redirect('/app/home')
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+        }
+    })
 }
 
-async function getStudentDataById(id) {
-  try {
-    const { data, error } = await supabase
-      .from('students')
-      .select('*')
-      .eq('uuid', id)
-      .single();
+async function registerStudent(req, res) {
+    return new Promise(async (resolve, reject) => {
+        const { email, senha, nome, cpf, rg, endereco, instituicao, curso } = req.body
 
-    if (error) {
-      throw error;
-    }
+        try {
 
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
+            const { data } = await supabase.auth.signUp({
+                email: email,
+                password: senha,
+            })
 
-async function getAllStudents() {
-  const { data, error } = await supabase.from('students').select('*');
-  if (error) {
-    throw error;
-  }
-  return data;
-}
+            await supabase.from('person').insert([
+                {
+                    cpf: cpf,
+                    uuid: data.user.id,
+                    name: nome,
+                    address: endereco,
+                    rg: rg,
+                    balance: 0,
+                }
+            ]).select()
 
-async function addStudent({ cpf, name, address, institution_id, course_id }) {
-  const { data, error } = await supabase.from('students').insert([
-    {
-      cpf,
-      name,
-      address,
-      institution_id,
-      course_id,
-    },
-  ]);
+            await supabase.from('students').insert([
+                {
+                cpf,
+                course_id: curso,
+                institution_id: instituicao,
+                }
+            ])
 
-  if (error) {
-    throw error;
-  }
+            resolve({ status: 200 })
 
-  return data;
-}
+        } catch (error) {
 
-async function deleteStudent(studentCPF) {
-  const { error } = await supabase
-    .from("students")
-    .delete()
-    .eq("cpf", studentCPF);
-
-  if (error) {
-    throw error;
-  }
-}
-
-async function loginStudent({ email, password }) {
-
-  let { data, error } = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password,
-  })
-
-  if (error) { }
-
-  const userData = await getStudentDataById(data.user.id)
-
-  const cookieData = { ...userData, email: data.user.email }
-
-  return cookieData
-}
-
-async function getTeacherDataById(id) {
-  try {
-    const { data, error } = await supabase
-      .from('teachers')
-      .select('*')
-      .eq('uuid', id)
-      .single();
-
-    if (error) {
-      throw error;
-    }
-
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
-async function loginTeacher({ email, password }) {
-
-  let { data, error } = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password,
-  })
-
-  if (error) { }
-
-  const userData = await getTeacherDataById(data.user.id)
-
-  const cookieData = { ...userData, email: data.user.email }
-
-  return cookieData
-}
-
-async function deleteStudent(studentCPF) {
-  const { error } = await supabase
-    .from("students")
-    .delete()
-    .eq("cpf", studentCPF);
-
-  if (error) {
-    throw error;
-  }
-}
-
-async function getAllTeachers() {
-  const { data, error } = await supabase.from('teachers').select('*');
-  if (error) {
-    throw error;
-  }
-  return data;
-}
-
-async function getTeacherBalance(cpf) {
-  try {
-    const { data, error } = await supabase
-      .from('teachers')
-      .select('balance')
-      .eq('cpf', cpf)
-      .single();
-
-    if (error) {
-      throw error;
-    }
-
-    const balance = data.balance;
-    return balance;
-  } catch (error) {
-    throw error;
-  }
+            reject({ status: 500 })
+        }
+    })
 }
 
 module.exports = {
-  registerUser,
-  getUserInfo,
-  getStudentBalance,
-  getStudentDataById,
-  getAllStudents,
-  addStudent,
-  deleteStudent,
-  loginStudent,
-  loginTeacher,
-  getAllTeachers,
-  getTeacherBalance,
-  loginTeacher,
-  getTeacherStudents,
-  addBalance,
-  removeFromStudentBalance
-};
+    registerStudent,
+    login,
+    logout,
+    renderHomePage,
+    renderPartnersPage,
+    renderStudentsPage,
+    renderRegisterPage,
+    renderBenefitsPage,
+}

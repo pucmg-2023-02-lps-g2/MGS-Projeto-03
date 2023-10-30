@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const { createClient } = require('@supabase/supabase-js');
@@ -12,31 +13,39 @@ module.exports.supabase = createClient(supabaseUrl, supabaseKey)
 const app = express();
 const PORT = process.env.PORT;
 
+app.set("view engine", "ejs");
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 
-// Middleware :)
+app.use('/public/icons', express.static('./public/icons'));
+
 app.use((req, res, next) => {
 
-    if (req.cookies.token) {
-      if (req.path === '/login' || req.path === '/register') {
-        res.redirect('/home'); 
-        return;
-      }
-    } else {
-      if (req.path !== '/login' && req.path !== '/register' && req.path !== '/') {
-        res.redirect('/login');
-        return;
-      }
+  if (req.cookies.token) {
+    if (req.path === '/auth/login' || req.path === '/auth/register' || req.path === '/') {
+      res.redirect('/app/home'); 
+      return;
     }
-    next();
+  } else {
+    if (req.path !== '/auth/login' && req.path !== '/auth/register' && req.path !== '/') {
+      res.redirect('/');
+      return;
+    }
+  }
+  next();
 });
 
-app.set("view engine", "ejs");
+app.use("/auth", require("./routes/authRoutes.js"));
 
-app.use("", require("./routes/routes.js"));
-app.use('/public/icons', express.static('./public/icons')); // Display de imagens só funciona com esse middleware
+app.use("/app", require("./routes/appRoutes.js"));
+
+app.use("/partner", require("./routes/partnerRoutes.js"));
+
+app.use("/student", require("./routes/studentRoutes.js"));
+
+app.use("/", require("./routes/defaultRoutes.js"));
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`)

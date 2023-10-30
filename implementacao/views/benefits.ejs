@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<div class="grid">
+    <div style="padding: 1rem;">
+        <a href="/home" role="button"><img src="../../public/icons/home.png" style="max-height: 25px;"></a>
+    </div>
+</div>
+
+<main class="containter">
+    <h3>Benefícios disponíveis</h3>
+    <table role="grid">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+                <th>Resgatar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% benefits.forEach(benefit => { %>
+                <tr>
+                    <td><%= benefit.name %></td>
+                    <td><%= benefit.price %></td>
+                    <td><%= benefit.description %></td>
+                    <td>
+                        <form action="/student/benefit/" method="POST">
+                            
+                            <input type="hidden" name="price" value="<%= benefit.price %>">
+
+                            <input type="hidden" name="id" value="<%= benefit.id %>">
+                            
+                            <button type="submit"><img src="../public/icons/send.png" alt="Enviar"></button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</main>
+
+<%- include('partials/footer') %>

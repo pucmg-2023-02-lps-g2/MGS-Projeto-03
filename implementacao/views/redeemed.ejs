@@ -2,22 +2,20 @@
 
 <header class="containter-fluid">
     <h1>Você resgatou: <%= benefit.name %></h1>
-
-
 </header>
 
 <main class="container-fluid">
     <div class="grid">
 
-        <h3>Preço: <%= benefit.price %></h3>
+        <h3>Preço: R$ <%= benefit.price %></h3>
 
         <hr>
 
-        <h3>Saldo Anterior: <%= (Number(benefit.price) + balance) %></h3>
+        <h3>Saldo Anterior: R$ <%= (Number(benefit.price) + (Number(balance[0].balance))) %></h3>
 
-        <h1>Saldo Atual: <%= balance %></h1>
+        <h1>Saldo Atual: R$ <%= (Number(balance[0].balance)) %></h1>
 
-        <form action="/home" method="get">
+        <form action="/app/home" method="get">
             <button type="submit">Voltar</button>
         </form>
     </div>

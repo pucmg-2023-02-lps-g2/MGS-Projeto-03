@@ -10,17 +10,9 @@
 
 <h1>Login</h1>
 
-
 <div class="grid">
     <div>
-        <form action="/login" method="post">
-
-            <label for="usuario">Usuário</label>
-            <select id="usuario" name="usuario" required>
-                <option value="" disabled selected>Selecione seu tipo de usuário</option>
-                <option value="aluno">Aluno</option>
-                <option value="professor">Professor</option>
-            </select>
+        <form action="/auth/login" method="post">
 
             <label for="email">E-mail</label>
             <input type="email" name="email" id="email">
@@ -36,6 +28,5 @@
         <!-- Div vazia para configurar o grid do Pico.css -->
     </div>
 </div>
-
 
 <%- include('partials/footer') %>

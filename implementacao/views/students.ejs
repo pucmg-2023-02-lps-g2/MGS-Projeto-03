@@ -1,14 +1,8 @@
 <%- include('partials/header') %>
-<%- include('partials/nav') %>
-
-<h3>Área do professor</h3>
 
 <div class="grid">
-    <div class="centered-div">
-        <p class="centered-text"> 
-            <img src="../public/icons/coin.png" style="height: 30px;">
-            <strong>Saldo: </strong> <%= teacherBalance %> moedas
-        </p>
+    <div style="padding: 1rem;">
+        <a href="/home" role="button"><img src="../../public/icons/home.png" style="max-height: 25px;"></a>
     </div>
 </div>
 
@@ -43,7 +37,7 @@
                             <%= student.balance %>
                         </td>
                         <td>
-                            <form style="margin: 0; padding: 0; display: flex;" action="/users/update/<%= student.cpf %>" method="POST">
+                            <form style="margin: 0; padding: 0; display: flex;" action="/student/update/<%= student.cpf %>" method="POST">
                                 <input type="number" name="coins" placeholder="1" required style="flex: 6; margin-right: 5px;">
                                 <button type="submit" style="flex: 1; margin-bottom: 0; height: 60px;"><img src="../public/icons/send.png" alt="Enviar"></button>
                             </form>
@@ -52,23 +46,7 @@
                     <% }); %>
             </tbody>
         </table>
-
-<style>
-    .centered-div {
-        background-color: #b7dfec;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 60px;
-        width: 240px;
-        border-radius: 8px;
-    }
-
-    .centered-text {
-        text-align: center;
-        margin: 0;
-        color: black;
-    }
-</style>
+    </div>
+</main>
 
 <%- include('partials/footer') %>

@@ -1,38 +1,63 @@
-const supabase = require("../config/supabase");
+const { supabase } = require("../app");
 
 async function getAllPartners() {
-    const { data, error } = await supabase.from('partners').select('*');
-    if (error) {
-        throw error;
-    }
-    return data;
+    return new Promise(async (resolve, reject) => {
+        try {
+
+            const { data } = await supabase.from('partners').select('*');
+
+            resolve({ status: 200, partners: data })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+
+        }
+    })
 }
 
-async function addPartner({ id, name }) {
-  const { data, error } = await supabase.from('partners').insert([
-      {
-          id,
-          name,
-      },
-  ]);
+async function addPartner(req, res) {
+    return new Promise(async (resolve, reject) => {
 
-  if (error) {
-      throw error;
-  }
+        const { id, name } = req.body;
 
-  return data;
+        try {
+
+            await supabase.from('partners').insert([
+                {
+                    id,
+                    name,
+                },
+            ]);
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+
+        }
+    })
 }
 
-async function deletePartner(partnerId) {
-    const { error } = await supabase
-      .from("partners")
-      .delete()
-      .eq("id", partnerId);
-  
-    if (error) {
-      throw error;
-    }
-  }
+async function deletePartner(req, res) {
+    return new Promise(async (resolve, reject) => {
+
+        const partnerId = req.params.id;
+
+        try {
+
+            await supabase.from("partners").delete().eq("id", partnerId);
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+
+        }
+    })
+}
 
 module.exports = {
     getAllPartners,

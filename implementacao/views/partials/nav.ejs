@@ -1,18 +1,24 @@
 <nav style="padding: 0 0 1rem 0;">
     <ul>
-        <li><a href="/home" role="button"><img src="../../public/icons/home.png" style="max-height: 25px;"></a></li>
+        <li>
+            <a href="/home" role="button">
+                <img src="../../public/icons/home.png" style="max-height: 25px;">
+            </a>
+        </li>
+
+        <% if (user_role === 'teacher') { %>
+            <%- include('nav_teacher') %>
+        <% } else { %>
+            <%- include('nav_student') %>
+        <% } %>
+
+        <li>
+            <form method="post" action="/auth/logout" style="margin: 0;">
+                <button type="submit">
+                    <a id="logoutIcon"><img src="../public/icons/exit.png"
+                        style="border: none; background-color: white; cursor: pointer;" alt="Sair"></a>
+                </button>
+            </form>
+        </li>
     </ul>
-    <% if (role==='teacher' ) { %>
-        <%- include('nav_teacher') %>
-            <% } %>
-                <ul>
-                    <li>
-                        <form method="post" action="/logout" style="margin: 0;">
-                            <button type="submit" style="border: none; background-color: white;">
-                                <a id="logoutIcon" style="cursor: pointer;"><img src="../public/icons/exit.png"
-                                        alt="Sair"></a>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
 </nav>
