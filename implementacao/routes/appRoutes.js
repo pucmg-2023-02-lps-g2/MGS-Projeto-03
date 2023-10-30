@@ -12,4 +12,6 @@ router.get('/partners', userController.getPartnersPage);
 
 router.get('/students', userController.getStudentsPage);
 
+router.get('/transactions', userController.getTransactionsPage);
+
 module.exports = router

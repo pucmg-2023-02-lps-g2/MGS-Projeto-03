@@ -1,6 +1,42 @@
 const { supabase } = require("../app");
 const { getAllPartners } = require("./partnerModel");
 
+async function renderTransactionsPage(req, res) {
+    return new Promise(async (resolve, reject) => { 
+
+        const { cpf } = req.cookies
+
+        try {
+
+            const transactions = await getTransactionsFromCpf(cpf)
+
+            res.render('transactions', { transactions })
+
+            resolve({ status: 200 })
+
+        } catch (error) {
+
+            reject({ status: 500 })
+        }
+    })
+}
+
+async function createNewTransaction(cpf, message) {
+    const { data, error } = await supabase.from('transactions').insert([
+        {
+            cpf: cpf,
+            message: message,
+            created_at: new Date()
+        }
+    ])
+}
+
+async function getTransactionsFromCpf(cpf) {
+    const { data, error } = await supabase.from('transactions').select('*').eq('cpf', cpf)
+
+    return data
+}
+
 async function renderRegisterPage(req, res) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -79,8 +115,6 @@ async function renderPartnersPage(req, res) {
             // Fazer isso aqui é errado, deveria ser chamado uma http request para partnerController
             const response = await getAllPartners();
 
-            console.log(response);
-
             res.render('partners', { partners: response.partners })
 
             resolve({ status: 200 })
@@ -128,7 +162,7 @@ async function getStudentFromTeacherCpf(teacherCpf) {
 
     var students = []
 
-    data.departments.courses.forEach(course => { console.log(course.students.forEach(student => { students.push(student.person) }))})
+    data.departments.courses.forEach(course => { course.students.forEach(student => { students.push(student.person) })})
 
     return students
 }
@@ -251,9 +285,11 @@ module.exports = {
     registerStudent,
     login,
     logout,
+    createNewTransaction,
     renderHomePage,
     renderPartnersPage,
     renderStudentsPage,
     renderRegisterPage,
     renderBenefitsPage,
+    renderTransactionsPage,
 }

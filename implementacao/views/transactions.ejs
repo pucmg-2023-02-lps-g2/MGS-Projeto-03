@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<div class="grid">
+    <div style="padding: 1rem;">
+        <a href="/home" role="button"><img src="../../public/icons/home.png" style="max-height: 25px;"></a>
+    </div>
+</div>
+
+<main class="containter">
+    <h3>Transações</h3>
+    <table role="grid">
+        <thead>
+            <tr>
+                <th>Extrato</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% transactions.forEach(transaction => { %>
+                <tr>
+                    <td><%= transaction.message %></td>
+                    <td><%= transaction.created_at %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</main>
+
+<%- include('partials/footer') %>

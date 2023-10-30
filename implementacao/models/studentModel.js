@@ -1,4 +1,5 @@
 const { supabase } = require("../app");
+const { createNewTransaction } = require("./userModel");
 
 async function getBalanceByCpf(cpf) {
     const { data } = await supabase.from('person').select('balance').eq('cpf', cpf)
@@ -26,6 +27,10 @@ async function removeCoins(req, res) {
             const studentBalance = await getBalanceByCpf(cpf)
 
             await supabase.from('person').update({ balance: (Number(studentBalance[0].balance) - Number(price)) }).eq('cpf', cpf)
+
+            const message = `- ${Number(price)} Moedas - Resgatou ${benefit[0].name}`
+
+            await createNewTransaction(cpf, message)
 
             res.render('redeemed', { benefit: benefit[0], balance: studentBalance })
 
@@ -57,6 +62,10 @@ async function giveCoins(req, res) {
             await supabase.from('person').update({ balance: (Number(studentBalance[0].balance) + Number(coins)) }).eq('cpf', studentCpf)
 
             await supabase.from('person').update({ balance: (Number(teacherBalance[0].balance) - Number(coins)) }).eq('cpf', cpf)
+
+            await createNewTransaction(studentCpf, `+ ${Number(coins)} Moedas - Recebeu moedas`)
+
+            await createNewTransaction(cpf, `- ${Number(coins)} Moedas - Enviou moedas`)
 
             res.redirect('/app/students')
 
