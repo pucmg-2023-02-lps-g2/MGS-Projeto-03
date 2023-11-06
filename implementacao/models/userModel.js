@@ -2,7 +2,7 @@ const { supabase } = require("../app");
 const { getAllPartners } = require("./partnerModel");
 
 async function renderTransactionsPage(req, res) {
-    return new Promise(async (resolve, reject) => { 
+    return new Promise(async (resolve, reject) => {
 
         const { cpf } = req.cookies
 
@@ -102,7 +102,7 @@ async function renderStudentsPage(req, res) {
             const { balance } = await getPersonById(token)
 
             const students = await getStudentFromTeacherCpf(cpf);
-        
+
             res.render('students', { students, balance })
 
             resolve({ status: 200 })
@@ -163,11 +163,11 @@ async function getStudentFromTeacherCpf(teacherCpf) {
         department_id,
         departments ( department_id, courses ( department_id, course_id, students ( course_id, cpf, person ( cpf, name, address, balance ))))
     `)
-    .eq('cpf', teacherCpf).single()
+        .eq('cpf', teacherCpf).single()
 
     var students = []
 
-    data.departments.courses.forEach(course => { course.students.forEach(student => { students.push(student.person) })})
+    data.departments.courses.forEach(course => { course.students.forEach(student => { students.push(student.person) }) })
 
     return students
 }
@@ -186,7 +186,7 @@ async function isTeacher(cpf) {
 
 async function logout(req, res) {
     return new Promise(async (resolve, reject) => {
-        
+
         res.cookie('token', null, { expires: new Date(0) })
         res.cookie('name', null, { expires: new Date(0) })
         res.cookie('email', null, { expires: new Date(0) })
@@ -227,7 +227,7 @@ async function login(req, res) {
             res.cookie('email', data.user.email)
 
             if (await isTeacher(userInfo.cpf)) {
-                
+
                 res.cookie('user_role', 'teacher')
 
             } else {
@@ -271,9 +271,9 @@ async function registerStudent(req, res) {
 
             await supabase.from('students').insert([
                 {
-                cpf,
-                course_id: curso,
-                institution_id: instituicao,
+                    cpf,
+                    course_id: curso,
+                    institution_id: instituicao,
                 }
             ])
 
