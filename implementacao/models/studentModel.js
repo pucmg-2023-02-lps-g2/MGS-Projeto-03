@@ -27,7 +27,7 @@ async function removeCoins(req, res) {
             const studentBalance = await getBalanceByCpf(cpf)
 
             if (Number(studentBalance[0].balance) - Number(price) < 0) {
-                res.render('error', { message: 'Você não tem moedas suficientes para resgatar esse beneficio' })
+                res.render('error', { message: 'Você não tem moedas suficientes para resgatar esse benefício' })
 
                 return
             }
@@ -75,9 +75,9 @@ async function giveCoins(req, res) {
 
             await supabase.from('person').update({ balance: (Number(teacherBalance[0].balance) - Number(coins)) }).eq('cpf', cpf)
 
-            await createNewTransaction(studentCpf, `+ ${Number(coins)} Moedas - Recebeu moedas`)
+            await createNewTransaction(studentCpf, `+ ${Number(coins)} moedas — Recebeu moedas`)
 
-            await createNewTransaction(cpf, `- ${Number(coins)} Moedas - Enviou moedas`)
+            await createNewTransaction(cpf, `- ${Number(coins)} moedas — Enviou moedas`)
 
             res.redirect('/app/students')
 
