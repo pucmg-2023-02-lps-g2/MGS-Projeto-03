@@ -22,7 +22,6 @@ Deseja-se desenvolver um sistema de moeda estudantil no qual um professor pode d
 - Ao resgatar uma vantagem, o aluno deve ter o valor descontado do seu saldo. Um email de cupom deve ser enviado para que ele utilize na troca presencial. Um email também deve ser enviado ao parceiro, para que ele possa conferir a troca. Ambos os emails devem incluir um código gerado pelo sistema, a fim de facilitar o processo de conferência.
 
 - Por fim, alunos, professores e empresas parceiras precisam ter um login e uma senha cadastrados para acessar o sistema. Em todos os casos, um processo de autenticação é necessário para realização dos requisitos.
----
 
 # Histórias de Usuário
 
@@ -34,4 +33,24 @@ Deseja-se desenvolver um sistema de moeda estudantil no qual um professor pode d
 - Eu, como **professor**, gostaria de visualizar meu extrato para saber quantas moedas foram enviadas.
 - Eu, como **membro externo interessado**, quero realizar o cadastro para fazer uma parceria com o sistema.
 - Eu, como **membro externo interessado**, quero cadastrar uma vantagem no sistema.
----
+
+# Diagramas
+
+### Diagrama de Casos de Uso
+[Diagrama de Casos de Uso](/projeto/diagramas/diagrama_de_casos_de_uso/diagrama_de_casos_de_uso.png)
+
+### Diagrama de Classes
+[Diagrama de Classes](/projeto/diagramas/diagrama_de_classes/diagrama_de_classes.jpg)
+
+### Diagrama de Entidade Relacionamento (DER)
+[DER](/projeto/diagramas/diagrama_entidade_relacionamento/diagrama_entidade_relacionamento.jpg)
+
+### Diagrama de Sequência
+#### Cadastrar vantagem
+[Diagrama de Sequência - Cadastrar vantagem](/projeto/diagramas/diagrama_sequencia/sequencia_cadastrar_vantagem.png)
+
+#### Enviar moedas
+[Diagrama de Sequência - Enviar moedas](/projeto/diagramas/diagrama_sequencia/sequencia_enviar_moedas.png)
+
+#### Resgatar vantagem
+[Diagrama de Sequência - Resgatar vantagem](/projeto/diagramas/diagrama_sequencia/sequencia_resgatar_vantagem.png)
