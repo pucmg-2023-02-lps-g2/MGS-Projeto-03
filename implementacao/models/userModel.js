@@ -57,29 +57,6 @@ async function renderRegisterPage(req, res) {
     })
 }
 
-async function renderBenefitsPage(req, res) {
-    return new Promise(async (resolve, reject) => {
-
-        const { token } = req.cookies
-
-        try {
-
-            const { balance } = await getPersonById(token)
-
-            const benefits = await listBenefits()
-
-            res.render('benefits', { benefits, balance })
-
-            resolve({ status: 200 })
-
-        } catch (error) {
-
-            reject({ status: 500 })
-
-        }
-    })
-}
-
 async function getAllInstitutions() {
     const { data } = await supabase.from('institutions').select('*')
 
@@ -184,6 +161,12 @@ async function isTeacher(cpf) {
     return (data !== null ? true : false)
 }
 
+async function isPartnerRep(cpf) {
+    const { data, error } = await supabase.from('partner_reps').select('*').eq('cpf', cpf).single()
+
+    return (data !== null ? true : false)
+}
+
 async function logout(req, res) {
     return new Promise(async (resolve, reject) => {
 
@@ -229,6 +212,10 @@ async function login(req, res) {
             if (await isTeacher(userInfo.cpf)) {
 
                 res.cookie('user_role', 'teacher')
+
+            } else if (await isPartnerRep(userInfo.cpf)) {
+
+                res.cookie('user_role', 'partner_rep')
 
             } else {
 
@@ -295,6 +282,5 @@ module.exports = {
     renderPartnersPage,
     renderStudentsPage,
     renderRegisterPage,
-    renderBenefitsPage,
     renderTransactionsPage,
 }

@@ -8,17 +8,11 @@
 
         <% if (user_role === 'teacher') { %>
             <%- include('nav_teacher') %>
+        <% } else if (user_role === 'partner_rep') { %>
+            <%- include('nav_partner_rep') %>
         <% } else { %>
             <%- include('nav_student') %>
         <% } %>
-
-        <li>
-            <form method="get" action="/app/transactions" style="margin: 0;">
-                <button type="submit">
-                    Transações
-                </button>
-            </form>
-        </li>
 
         <li>
             <form method="post" action="/auth/logout" style="margin: 0;">

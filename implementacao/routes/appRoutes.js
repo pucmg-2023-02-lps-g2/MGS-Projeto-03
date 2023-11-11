@@ -4,8 +4,6 @@ const router = require('express').Router()
 
 router.get('/home', userController.getHomePage);
 
-router.get('/benefits', userController.getBenefitsPage);
-
 router.get('/partners', userController.getPartnersPage);
 
 router.get('/students', userController.getStudentsPage);
