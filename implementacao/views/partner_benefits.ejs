@@ -1,5 +1,11 @@
 <%- include('partials/header') %>
 
+<div class="grid">
+    <div style="padding: 1rem;">
+        <a href="/home" role="button"><img src="../../public/icons/home.png" style="max-height: 25px;"></a>
+    </div>
+</div>
+
 <main class="container" ;>
     <h3>Benefícios oferecidos</h3>
     <table role="grid">
@@ -42,25 +48,28 @@
     <h4>Adicionar benefício</h4>
     <form action="/benefit/add" method="POST">
         <div class="grid">
-            <label for="id">
-                ID
-                <input type="text" name="id" placeholder="Ex: '1'" required>
-            </label>
+            <div>
+                <label for="id">
+                    ID
+                    <input type="text" name="id" placeholder="Ex: '1'" required>
+                </label>
 
-            <label for="name">
-                Nome
-                <input type="text" name="name" placeholder="Ex: 'Fones de Ouvido Galaxy Ear Buds'" required>
-            </label>
+                <label for="name">
+                    Nome
+                    <input type="text" name="name" placeholder="Ex: 'Fones de Ouvido Galaxy Ear Buds'" required>
+                </label>
+            </div>
 
-            <label for="description">
-                Descrição
-                <input type="text" name="description" required>
-            </label>
-
-            <label for="price">
-                Preço (em moedas)
-                <input type="text" name="price" placeholder="Ex: '50'" required>
-            </label>
+            <div>
+                <label for="price">
+                    Preço (em moedas)
+                    <input type="text" name="price" placeholder="Ex: '50'" required>
+                </label>
+                <label for="description">
+                    Descrição
+                    <input type="text" name="description" required>
+                </label>
+            </div>
         </div>
 
         <button type="submit">Novo benefício</button>
