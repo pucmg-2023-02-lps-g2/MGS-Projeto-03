@@ -1,24 +1,51 @@
 <%- include('partials/header') %>
 
-<header class="containter-fluid">
-    <h1>Você resgatou: <%= benefit.name %></h1>
-</header>
+    <main class="container">
+        <h3>Parabéns! Você resgatou <%= benefit.name %>
+        </h3>
 
-<main class="container-fluid">
-    <div class="grid">
+        <div>
+            <div class="price-box">
+                <p class="price"><strong>Preço: </strong>
+                    <%= benefit.price %> moedas
+                </p>
+            </div>
 
-        <h3>Preço: R$ <%= benefit.price %></h3>
+            <div style="margin-top: 1rem;">
+                <p>
+                    <img src="/public/icons/coin.png" style="height: 30px;">
+                    <strong>Saldo anterior: </strong>
+                    <%= (Number(balance[0].balance)) %> moedas
+                </p>
+    
+                <p>
+                    <img src="/public/icons/coin.png" style="height: 30px;">
+                    <strong>Saldo atual: </strong>
+                    <%= (Number(balance[0].balance)) - (Number(benefit.price)) %> moedas
+                </p>
+    
+                <div style="display: flex; justify-content: end;">
+                    <form action="/app/home" method="get">
+                        <button type="submit" style="width: 120px;">Voltar</button>
+                    </form>
+                </div>
+            </div>          
+        </div>
+    </main>
 
-        <hr>
+    <style>
+        .price-box {
+            background-color: #1095C1;
+            border-radius: 5px;
+            width: 240px;
+            margin: 0.5rem 0;
+        }
 
-        <h3>Saldo Anterior: R$ <%= (Number(benefit.price) + (Number(balance[0].balance))) %></h3>
+        .price {
+            margin: 0 0 0 0.5rem;
+            padding: 0.5rem;
+            color: #11191F;
+        }
+    </style>
 
-        <h1>Saldo Atual: R$ <%= (Number(balance[0].balance)) %></h1>
-
-        <form action="/app/home" method="get">
-            <button type="submit">Voltar</button>
-        </form>
-    </div>
-</main>
-
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>
