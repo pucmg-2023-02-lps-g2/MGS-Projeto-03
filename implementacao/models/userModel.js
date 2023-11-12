@@ -323,6 +323,7 @@ module.exports = {
     login,
     logout,
     createNewTransaction,
+    getPartnerIdByCpf,
     renderHomePage,
     renderPartnersPage,
     renderStudentsPage,

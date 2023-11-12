@@ -32,6 +32,8 @@ async function addPartner(req, res) {
 
             resolve({ status: 200 })
 
+            res.status(200).redirect('back');
+
         } catch (error) {
 
             reject({ status: 500 })
@@ -50,6 +52,8 @@ async function deletePartner(req, res) {
             await supabase.from("partners").delete().eq("id", partnerId);
 
             resolve({ status: 200 })
+
+            res.status(200).redirect('back');
 
         } catch (error) {
 
