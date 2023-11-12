@@ -1,4 +1,4 @@
-const { renderHomePage, renderPartnersPage, renderStudentsPage, renderBenefitsPage, renderTransactionsPage } = require("../models/userModel")
+const { renderHomePage, renderPartnersPage, renderStudentsPage, renderUserBenefitsPage, renderPartnerBenefitsPage, renderTransactionsPage } = require("../models/userModel")
 
 module.exports = {
 
@@ -17,9 +17,14 @@ module.exports = {
         await renderStudentsPage(req, res)
     },
     
-    async getBenefitsPage(req, res) {
+    async getUserBenefitsPage(req, res) {
 
-        await renderBenefitsPage(req, res)
+        await renderUserBenefitsPage(req, res)
+    },
+
+    async getPartnerBenefitsPage(req, res) {
+
+        await renderPartnerBenefitsPage(req, res)
     },
 
     async getPartnersPage(req, res) {

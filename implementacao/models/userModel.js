@@ -138,7 +138,7 @@ async function listBenefits() {
     return data
 }
 
-async function renderBenefitsPage(req, res) {
+async function renderUserBenefitsPage(req, res) {
     return new Promise(async (resolve, reject) => {
         const { token } = req.cookies
         try {
@@ -152,6 +152,33 @@ async function renderBenefitsPage(req, res) {
     })
 }
 
+async function getPartnerIdByCpf(cpf) {
+    const { data } = await supabase.from('partner_reps').select('*').eq('cpf', cpf).single()
+
+    return data.partner_id
+}
+
+async function getBenefitsByPartnerId(partnerId) {
+    const { data } = await supabase.from('benefits').select('*').eq('partner_id', partnerId)
+
+    return data
+}
+
+async function renderPartnerBenefitsPage(req, res) {
+    return new Promise(async (resolve, reject) => {
+        const { cpf, token } = req.cookies;
+
+        try {
+            const partnerId = await getPartnerIdByCpf(cpf);
+            const benefits = await getBenefitsByPartnerId(partnerId);
+
+            res.render('partner_benefits', { benefits });
+            resolve({ status: 200 });
+        } catch (error) {
+            reject({ status: 500 });
+        }
+    });
+}
 async function getStudentFromTeacherCpf(teacherCpf) {
     const { data, error } = await supabase.from('teachers').select(`
         cpf,
@@ -300,6 +327,7 @@ module.exports = {
     renderPartnersPage,
     renderStudentsPage,
     renderRegisterPage,
-    renderBenefitsPage,
+    renderUserBenefitsPage,
+    renderPartnerBenefitsPage,
     renderTransactionsPage,
 }

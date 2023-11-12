@@ -41,9 +41,11 @@ app.use("/auth", require("./routes/authRoutes.js"));
 
 app.use("/app", require("./routes/appRoutes.js"));
 
+app.use("/student", require("./routes/studentRoutes.js"));
+
 app.use("/partner", require("./routes/partnerRoutes.js"));
 
-app.use("/student", require("./routes/studentRoutes.js"));
+app.use("/benefit", require("./routes/benefitRoutes.js"));
 
 app.use("/", require("./routes/defaultRoutes.js"));
 

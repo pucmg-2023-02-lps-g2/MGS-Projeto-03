@@ -8,7 +8,9 @@ router.get('/partners', userController.getPartnersPage);
 
 router.get('/students', userController.getStudentsPage);
 
-router.get('/benefits', userController.getBenefitsPage);
+router.get('/user-benefits', userController.getUserBenefitsPage);
+
+router.get('/partner-benefits', userController.getPartnerBenefitsPage);
 
 router.get('/transactions', userController.getTransactionsPage);
 

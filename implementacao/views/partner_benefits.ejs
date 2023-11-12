@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<main class="container";    >
+    <h3>Benefícios oferecidos</h3>
+    <table role="grid">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% benefits.forEach(benefit => { %>
+                <tr>
+                    <td><%= benefit.name %></td>
+                    <td><%= benefit.price %></td>
+                    <td><%= benefit.description %></td>
+                    <td>
+                        
+                        <form action="/benefit/delete/<%= benefit.id %>" method="POST" style="margin-bottom: 0">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button  type="submit" style="margin-bottom: 0; width: 100px;"><img src="/public/icons/bin.png" alt="Excluir"></button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</main>
+
+<%- include('partials/footer') %>
