@@ -37,6 +37,11 @@ async function getTransactionsFromCpf(cpf) {
     return data
 }
 
+async function getUserBalance() {
+    const { token } = req.cookies
+    const { balance } = await getPersonById(token)
+}
+
 async function renderRegisterPage(req, res) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -133,6 +138,19 @@ async function listBenefits() {
     return data
 }
 
+async function renderBenefitsPage(req, res) {
+    return new Promise(async (resolve, reject) => {
+        const { token } = req.cookies
+        try {
+            const { balance } = await getPersonById(token)
+            const benefits = await listBenefits()
+            res.render('benefits', { benefits, balance })
+            resolve({ status: 200 })
+        } catch (error) {
+            reject({ status: 500 })
+        }
+    })
+}
 
 async function getStudentFromTeacherCpf(teacherCpf) {
     const { data, error } = await supabase.from('teachers').select(`
@@ -282,5 +300,6 @@ module.exports = {
     renderPartnersPage,
     renderStudentsPage,
     renderRegisterPage,
+    renderBenefitsPage,
     renderTransactionsPage,
 }
