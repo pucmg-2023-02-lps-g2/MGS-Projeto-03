@@ -8,25 +8,26 @@
     <title>MGS | Login</title>
 </head>
 
-<h1>Login</h1>
+<main class="container">
+    <h1>Login</h1>
+    <div class="grid">
+        <div>
+            <form action="/auth/login" method="post">
 
-<div class="grid">
-    <div>
-        <form action="/auth/login" method="post">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email">
 
-            <label for="email">E-mail</label>
-            <input type="email" name="email" id="email">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha">
 
-            <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha">
+                <button type="submit">Logar</button>
 
-            <button type="submit">Logar</button>
-
-        </form>
+            </form>
+        </div>
+        <div>
+            <!-- Div vazia para configurar o grid do Pico.css -->
+        </div>
     </div>
-    <div>
-        <!-- Div vazia para configurar o grid do Pico.css -->
-    </div>
-</div>
+</main>
 
 <%- include('partials/footer') %>
