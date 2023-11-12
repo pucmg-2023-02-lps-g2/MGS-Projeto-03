@@ -144,7 +144,7 @@ async function renderUserBenefitsPage(req, res) {
         try {
             const { balance } = await getPersonById(token)
             const benefits = await listBenefits()
-            res.render('benefits', { benefits, balance })
+            res.render('user-benefits', { benefits, balance })
             resolve({ status: 200 })
         } catch (error) {
             reject({ status: 500 })

@@ -1,10 +1,11 @@
 <%- include('partials/header') %>
 
-    <h1>Cadastrar</h1>
+<div class="container">
+    <h2 style="margin-top: 1.5rem;">Cadastrar usuário</h2>
 
     <form action="/auth/register" method="post">
 
-        <h2>Credenciais</h2>
+        <h4>Credenciais</h4>
 
         <label for="email">E-mail</label>
         <input type="email" name="email" id="email" required>
@@ -14,7 +15,7 @@
 
         <hr>
 
-        <h2>Dados pessoais</h2>
+        <h4>Dados pessoais</h4>
 
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome" required>
@@ -30,18 +31,20 @@
 
         <hr>
 
-        <h2>Dados acadêmicos</h2>
+        <h4>Dados acadêmicos</h4>
 
         <label for="instituicao">Instituição</label>
         <select id="instituicao" name="instituicao" required>
 
             <option value="" disabled selected>Selecione</option>
 
-            <% institutions.forEach((inst) => { %>
+            <% institutions.forEach((inst)=> { %>
 
-                <option value="<%= inst.id %>"><%= inst.name %></option>
+                <option value="<%= inst.id %>">
+                    <%= inst.name %>
+                </option>
 
-            <% }) %>
+                <% }) %>
         </select>
 
         <label for="curso">Curso</label>
@@ -49,15 +52,20 @@
 
             <option value="" disabled selected>Selecione</option>
 
-            <% courses.forEach((course) => { %>
+            <% courses.forEach((course)=> { %>
 
-                <option value="<%= course.id %>"><%= course.name %></option>
+                <option value="<%= course.id %>">
+                    <%= course.name %>
+                </option>
 
-            <% }) %>
+                <% }) %>
         </select>
 
         <button type="submit">Cadastrar</button>
 
     </form>
+</div>
+
+
 
 <%- include('partials/footer') %>
