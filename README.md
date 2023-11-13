@@ -1,7 +1,7 @@
 # MGS
-<div style="margin-bottom: 2rem; display: flex; align-items: center; justify-content: center;">
-  <img src="./implementacao/public/icons/logo.png" alt="Logo MGS" height="300px" style="margin-right: 2rem;">
-</div>
+<p align="center">
+  <a href="url"><img src="./implementacao/public/icons/logo.png" height="300" alt="MGS Logo"></a>
+</p>
 
 <p>
     <strong>MGS — Moedas Gerenciadas por um Sistema</strong> — tem como objetivo estimular o reconhecimento do mérito estudantil através de moedas virtuais. As moedas são distribuídas por professores a seus alunos e podem ser trocadas pelos alunos por diversas vantagens em empresas parceiras. 
