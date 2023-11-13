@@ -37,11 +37,6 @@ async function getTransactionsFromCpf(cpf) {
     return data
 }
 
-async function getUserBalance() {
-    const { token } = req.cookies
-    const { balance } = await getPersonById(token)
-}
-
 async function renderRegisterPage(req, res) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -179,6 +174,7 @@ async function renderPartnerBenefitsPage(req, res) {
         }
     });
 }
+
 async function getStudentFromTeacherCpf(teacherCpf) {
     const { data, error } = await supabase.from('teachers').select(`
         cpf,
@@ -265,11 +261,9 @@ async function login(req, res) {
             } else {
 
                 res.cookie('user_role', 'student')
-
             }
 
             res.redirect('/app/home')
-
             resolve({ status: 200 })
 
         } catch (error) {
