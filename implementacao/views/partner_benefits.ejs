@@ -38,12 +38,12 @@
                             <!-- Excluir -->
                             <form action="/benefit/delete/<%= benefit.id %>" method="POST">
                                 <input type="hidden" name="_method" value="DELETE" />
-                                <button type="submit" style="width: 62px; height: 62px; margin-right: 0.5rem;">
+                                <button type="submit" style="width: 62px; height: 62px; margin: 0 0.5rem 0 0;">
                                     <img src="/public/icons/bin.png" alt="Excluir">
                                 </button>
                             </form>
                             <!-- Editar -->
-                            <button style="width: 62px; height: 62px; margin-right: 0.5rem"
+                            <button style="width: 62px; height: 62px; margin: 0 0.5rem 0 0;"
                                 onclick="openModal('<%= benefit.id %>', '<%= benefit.name %>', '<%= benefit.price %>', '<%= benefit.description %>')">
                                 <img src="/public/icons/edit.png" alt="Editar">
                             </button>
@@ -111,6 +111,7 @@
 
 <!-- Controle do modal -->
 <script>
+    // Recebe como parâmetro os atributos de benefit e os insere em cada campo do modal
     function openModal(id, name, price, description) {
         document.getElementById('edit-id').value = id;
         document.getElementById('edit-name').value = name;
