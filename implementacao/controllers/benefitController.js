@@ -1,4 +1,4 @@
-const { deleteBenefit, addBenefit  } = require("../models/benefitModel")
+const { addBenefit, editBenefit, deleteBenefit  } = require("../models/benefitModel")
 
 module.exports = {
 
@@ -10,5 +10,10 @@ module.exports = {
     async deleteBenefit(req, res) {
 
         await deleteBenefit(req, res)
-    }
+    },
+
+    async editBenefit(req, res) {
+
+        await editBenefit(req, res)
+    },
 }

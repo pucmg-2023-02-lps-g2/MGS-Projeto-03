@@ -40,18 +40,35 @@ async function deleteBenefit(req, res) {
             await supabase.from("benefits").delete().eq("id", benefitId);
 
             resolve({ status: 200 })
-
             res.status(200).redirect('back');
 
         } catch (error) {
-
             reject({ status: 500 })
+        }
+    })
+}
 
+async function editBenefit(req, res) {
+    return new Promise(async (resolve, reject) => {
+        const { id, name, price, description } = req.body;
+
+        try {
+            await supabase
+                .from('benefits')
+                .update({ name, price, description })
+                .eq('id', id);
+
+            resolve({ status: 200 });
+            res.status(200).redirect('back');
+            
+        } catch (error) {
+            reject({ status: 500 });
         }
     })
 }
 
 module.exports = {
     addBenefit,
+    editBenefit,
     deleteBenefit,
 }

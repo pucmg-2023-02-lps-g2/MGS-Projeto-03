@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<main class="container"; style="padding-top: 1rem;">
+<main class="container" ; style="padding-top: 1rem;">
     <h3>Benefícios oferecidos</h3>
     <table role="grid">
         <thead>
@@ -34,11 +34,21 @@
                         <%= benefit.description %>
                     </td>
                     <td>
-                        <form action="/benefit/delete/<%= benefit.id %>" method="POST" style="margin-bottom: 0">
-                            <input type="hidden" name="_method" value="DELETE" />
-                            <button type="submit" style="margin-bottom: 0; width: 100px;"><img
-                                    src="/public/icons/bin.png" alt="Excluir"></button>
-                        </form>
+                        <div style="display: flex;">
+                            <!-- Excluir -->
+                            <form action="/benefit/delete/<%= benefit.id %>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="submit" style="width: 62px; height: 62px; margin-right: 0.5rem;">
+                                    <img src="/public/icons/bin.png" alt="Excluir">
+                                </button>
+                            </form>
+                            <!-- Editar -->
+                            <button style="width: 62px; height: 62px; margin-right: 0.5rem"
+                                onclick="openModal('<%= benefit.id %>', '<%= benefit.name %>', '<%= benefit.price %>', '<%= benefit.description %>')">
+                                <img src="/public/icons/edit.png" alt="Editar">
+                            </button>
+                        </div>
+
                     </td>
                 </tr>
                 <% }); %>
@@ -59,7 +69,6 @@
                     <input type="text" name="name" placeholder="Ex: 'Fones de Ouvido Galaxy Ear Buds'" required>
                 </label>
             </div>
-
             <div>
                 <label for="price">
                     Preço (em moedas)
@@ -67,7 +76,8 @@
                 </label>
                 <label for="description">
                     Descrição
-                    <input type="text" name="description" placeholder="Fones de ouvido práticos e compactos. " required>
+                    <input type="text" name="description" placeholder="Fones de ouvido práticos e compactos. "
+                        required>
                 </label>
             </div>
         </div>
@@ -75,6 +85,44 @@
         <button type="submit">Novo benefício</button>
     </form>
 
+    <!-- Modal - Editar vantagem -->
+    <div id="editModal" style="display: none;">
+        <dialog open>
+            <div style="width: 50%;">
+                <h4>Editar vantagem</h4>
+                <form action="/benefit/edit" method="POST">
+                    <input type="hidden" id="edit-id" name="id">
+                    <label for="edit-name">Nome</label>
+                    <input type="text" id="edit-name" name="name">
+                    <label for="edit-price">Preço</label>
+                    <input type="text" id="edit-price" name="price">
+                    <label for="edit-description">Descrição</label>
+                    <input type="text" id="edit-description" name="description">
+
+                    <button type="button" onclick="closeModal()"
+                        style="background-color: transparent;">Cancelar
+                    </button>
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
+        </dialog>
+    </div>
 </main>
+
+<!-- Controle do modal -->
+<script>
+    function openModal(id, name, price, description) {
+        document.getElementById('edit-id').value = id;
+        document.getElementById('edit-name').value = name;
+        document.getElementById('edit-price').value = price;
+        document.getElementById('edit-description').value = description;
+        document.getElementById('editModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('editModal').style.display = 'none';
+    }
+
+</script>
 
 <%- include('partials/footer') %>
