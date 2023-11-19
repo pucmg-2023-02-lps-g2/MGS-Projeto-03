@@ -4,11 +4,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { createClient } = require('@supabase/supabase-js');
 const cookieParser = require('cookie-parser');
+const sgMail = require('@sendgrid/mail')
 
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseKey = process.env.SUPABASE_KEY
 
 module.exports.supabase = createClient(supabaseUrl, supabaseKey)
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+module.exports.sgMail = sgMail
 
 const app = express();
 const PORT = process.env.PORT;

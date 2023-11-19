@@ -153,6 +153,12 @@ async function getPartnerIdByCpf(cpf) {
     return data.partner_id
 }
 
+async function getPersonByCpf(cpf) {
+    const { data } = await supabase.from('person').select('*').eq('cpf', cpf).single()
+
+    return data
+}
+
 async function getBenefitsByPartnerId(partnerId) {
     const { data } = await supabase.from('benefits').select('*').eq('partner_id', partnerId)
 
@@ -287,6 +293,7 @@ async function registerStudent(req, res) {
             await supabase.from('person').insert([
                 {
                     cpf: cpf,
+                    email: email,
                     uuid: data.user.id,
                     name: nome,
                     address: endereco,
@@ -314,10 +321,13 @@ async function registerStudent(req, res) {
 
 module.exports = {
     registerStudent,
+    createNewTransaction,
     login,
     logout,
-    createNewTransaction,
+    
     getPartnerIdByCpf,
+    getPersonByCpf,
+
     renderHomePage,
     renderPartnersPage,
     renderStudentsPage,

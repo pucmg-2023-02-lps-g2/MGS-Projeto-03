@@ -1,5 +1,5 @@
-const { supabase } = require("../app");
-const { createNewTransaction } = require("./userModel");
+const { supabase, sgMail } = require("../app");
+const { createNewTransaction, getPersonByCpf } = require("./userModel");
 
 async function getBalanceByCpf(cpf) {
     const { data } = await supabase.from('person').select('balance').eq('cpf', cpf)
@@ -13,16 +13,38 @@ async function getBenefitById(id) {
     return data
 }
 
+async function getPartnerById(id) {
+
+    const { data, error } = await supabase.from('partner_reps').select('*').eq('partner_id', id)
+
+    return data
+}
+
+async function getPersonEmailByUUID(uuid) {
+
+    // const { data, error } = await supabase.from('auth.users').select('email').eq('id', uuid)
+
+    const { data, error } = await supabase.auth.admin.getUserById(uuid)
+    
+    console.log(data, error);
+
+    return data
+}
+
 async function removeCoins(req, res) {
     return new Promise(async (resolve, reject) => {
     
         const { price, id } = req.body
 
-        const { cpf } = req.cookies
+        const { cpf, email, name } = req.cookies
 
         try {
 
             const benefit = await getBenefitById(id)
+
+            const partner = await getPartnerById(benefit[0].partner_id)
+
+            const partnerPerson = await getPersonByCpf(partner[0].cpf)
 
             const studentBalance = await getBalanceByCpf(cpf)
 
@@ -37,6 +59,50 @@ async function removeCoins(req, res) {
             const message = `- ${Number(price)} Moedas - Resgatou ${benefit[0].name}`
 
             await createNewTransaction(cpf, message)
+
+            const cupomId = crypto.randomUUID()
+
+            const msgStudent = {
+                to: email.replace(/%40/g, "@"),
+                from: '1396722@sga.pucminas.br',
+                subject: 'MGS - Cupom para Resgate de Beneficio Presencial',
+                text: 'Cupom MGS',
+                html: `
+                    <div>
+                        <p>Obrigado por resgatar o beneficio <strong>${benefit[0].name}!</strong> Geramos um cupom para que você possa resgata-lo presencialmente: </p>
+                        <p>Cupom: <strong>${cupomId}</strong></p>
+                    <div>`,
+            }
+
+            const msgPartner = {
+                to: partnerPerson.email,
+                from: '1396722@sga.pucminas.br',
+                subject: 'MGS - Beneficio Resgatado',
+                text: 'Cupom MGS',
+                html: `
+                    <div>
+                        <p>A estudante <strong>${name.replace(/%40/g, " ")}</strong> resgatou o beneficio <strong>${benefit[0].name}</strong> e um cupom foi gerado: </p>
+                        <p>Cupom: <strong>${cupomId}</strong></p>
+                    </div>`,
+            }
+
+            await sgMail
+                .send(msgStudent)
+                .then(() => {
+                    console.log('Email sent to student: ' + msgStudent.to)
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+
+            await sgMail
+                .send(msgPartner)
+                .then(() => {
+                    console.log('Email sent to partner: ' + msgPartner.to)
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
 
             res.render('redeemed', { benefit: benefit[0], balance: studentBalance })
 
