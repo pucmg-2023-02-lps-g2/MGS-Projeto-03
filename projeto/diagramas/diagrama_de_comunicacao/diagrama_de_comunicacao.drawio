@@ -1,0 +1,71 @@
+<mxfile host="app.diagrams.net" modified="2023-11-20T01:08:59.832Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0" etag="kpRkJT2UUfOGY3aZRUmm" version="22.1.3" type="device">
+  <diagram name="Page-1" id="CbEZe3c7o-YCIkE1q52O">
+    <mxGraphModel dx="2440" dy="965" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KEHIfEVsEnm3bxryrfiS-1" target="KEHIfEVsEnm3bxryrfiS-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-5" value="1. visualizarBeneficios()" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="KEHIfEVsEnm3bxryrfiS-4">
+          <mxGeometry x="-0.1882" y="-4" relative="1" as="geometry">
+            <mxPoint x="15" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-1" value="&lt;div&gt;Estudante&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="128" y="395" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KEHIfEVsEnm3bxryrfiS-3" target="KEHIfEVsEnm3bxryrfiS-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-9" value="3.1.&amp;nbsp; resgatar(beneficio)" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="KEHIfEVsEnm3bxryrfiS-7">
+          <mxGeometry x="-0.0393" y="2" relative="1" as="geometry">
+            <mxPoint x="6" y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="KEHIfEVsEnm3bxryrfiS-3" target="KEHIfEVsEnm3bxryrfiS-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-18" value="2. consultarBeneficios(estudante)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="KEHIfEVsEnm3bxryrfiS-17">
+          <mxGeometry x="-0.2821" y="-3" relative="1" as="geometry">
+            <mxPoint x="28" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-3" value=": Benefícios disponíveis" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="293" y="395" width="115" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="KEHIfEVsEnm3bxryrfiS-6" target="KEHIfEVsEnm3bxryrfiS-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-15" value="4. notificarResgate(cupom)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="KEHIfEVsEnm3bxryrfiS-13">
+          <mxGeometry x="-0.0143" y="-1" relative="1" as="geometry">
+            <mxPoint x="79" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-6" value=": Resgate" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="293" y="525" width="115" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="KEHIfEVsEnm3bxryrfiS-12" target="KEHIfEVsEnm3bxryrfiS-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-21" value="5. solicitarDisparo(mensagem, cupom)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="KEHIfEVsEnm3bxryrfiS-20">
+          <mxGeometry x="-0.0312" y="3" relative="1" as="geometry">
+            <mxPoint y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-12" value=": sgMail" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="293" y="645" width="115" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-16" value=": Benefícios" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="608" y="395" width="115" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-19" value="SendGrid" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="608" y="645" width="115" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KEHIfEVsEnm3bxryrfiS-22" value="3.2.&amp;nbsp; gerarCupom(beneficio)" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="358" y="495.0042857142857" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
