@@ -7,9 +7,7 @@ async function addBenefit(req, res) {
         const { cpf } = req.cookies;
 
         try {
-            // Recupera o id do parceiro pelo cpf do usuário logado para que o usuário não necessite informá-lo
-            // const partner_id = await getPartnerIdByCpf(cpf);
-            const partner_id = 2;    
+            const partner_id = await getPartnerIdByCpf(cpf);    
 
             await supabase.from('benefits').insert([
                 {
